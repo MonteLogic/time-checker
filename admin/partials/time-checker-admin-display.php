@@ -30,7 +30,7 @@ $dir = WP_PLUGIN_DIR . '/time-checker';
 // There needs to be logic here that executes and shows the possible times for the dropdown.
 // For enterting beginning/ending hours. 
 // 
-$sql_vars = new SQL_Init_Request(); 
+$sql_queue = new SQL_Init_Request(); 
 ?>
 
 
@@ -89,4 +89,9 @@ $sql_vars = new SQL_Init_Request();
 
 
 
-
+<?php
+// This is for the terminal
+$a = readline('Enter a string: ');
+ 
+// For output
+echo $a;   
