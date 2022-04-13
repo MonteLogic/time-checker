@@ -99,5 +99,18 @@ class Time_Checker_Admin {
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/time-checker-admin.js', array( 'jquery' ), $this->version, false );
 
 	}
+public function my_admin_menu() {
+
+	add_menu_page( 'TC General Settings', 'TC Settings', 'manage_options', 'ParentPageTC', 
+		array( $this , 'tc_settings_home') , 'dashicons-info', 250  );
+
+		
+		}
+		public function tc_settings_home(){
+
+		require_once 'partials/time-checker-admin-display.php';
+
+	}
+
 
 }
