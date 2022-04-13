@@ -22,7 +22,12 @@
  * @subpackage Course_Manager/admin/partials
  */
 
+
+include plugin_dir_path( __DIR__ ) . 'class-time-checker-admin-sql.php';
 $dir = WP_PLUGIN_DIR . '/time-checker';
+
+
+
 
 
 
