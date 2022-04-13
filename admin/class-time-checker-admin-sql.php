@@ -174,16 +174,17 @@ $no_match_keys = array_keys($no_match_entries);
 		}
 	}
 	return $a3;
-}}
+}
 
+
+
+
+public static function find_metadata_sql() {
 $product_id = $courseName;
-
-class find_metadata_sql {
-
 // Find billing emails in the DB order table
-public $statuses = array_map( 'esc_sql', wc_get_is_paid_statuses() );
+$statuses = array_map( 'esc_sql', wc_get_is_paid_statuses() );
 
-public $customer_emails = $wpdb->get_col("
+$customer_emails = $wpdb->get_col("
    SELECT DISTINCT pm.meta_value FROM {$wpdb->posts} AS p
    INNER JOIN {$wpdb->postmeta} AS pm ON p.ID = pm.post_id
    INNER JOIN {$wpdb->prefix}woocommerce_order_items AS i ON p.ID = i.order_id
@@ -195,7 +196,7 @@ public $customer_emails = $wpdb->get_col("
 ");
 
 
-public $customer_emails = $wpdb->get_col("
+$customer_emails = $wpdb->get_col("
    SELECT DISTINCT pm.meta_value FROM {$wpdb->posts} AS p
    INNER JOIN {$wpdb->postmeta} AS pm ON p.ID = pm.post_id
    INNER JOIN {$wpdb->prefix}woocommerce_order_items AS i ON p.ID = i.order_id
@@ -208,7 +209,7 @@ public $customer_emails = $wpdb->get_col("
 
 
 
-public $customer_phone = $wpdb->get_col("
+$customer_phone = $wpdb->get_col("
    SELECT DISTINCT pm.meta_value FROM {$wpdb->posts} AS p
    INNER JOIN {$wpdb->postmeta} AS pm ON p.ID = pm.post_id
    INNER JOIN {$wpdb->prefix}woocommerce_order_items AS i ON p.ID = i.order_id
@@ -219,7 +220,7 @@ public $customer_phone = $wpdb->get_col("
    AND im.meta_value = $product_id
 ");
 
-public $payment_method_title = $wpdb->get_col("
+$payment_method_title = $wpdb->get_col("
    SELECT pm.meta_value FROM {$wpdb->posts} AS p
    INNER JOIN {$wpdb->postmeta} AS pm ON p.ID = pm.post_id
    INNER JOIN {$wpdb->prefix}woocommerce_order_items AS i ON p.ID = i.order_id
@@ -234,18 +235,18 @@ public $payment_method_title = $wpdb->get_col("
  *  This going into wp_postmeta and looks through the column of 
  *  meta_key for the value of every booking customer who booked $course_name.
  */
-public $booking_product_id_sql_cmd = 
+$booking_product_id_sql_cmd = 
 		"SELECT post_id FROM {$wpdb->prefix}postmeta WHERE meta_key = '_booking_product_id' AND meta_value = $product_id ";
 
 
 /**
  * The variable $array_booking_product_id_sql_cmd takes the sql queued results and turns it into an array. 
  */
-public $array_booking_product_id_sql_cmd =
+$array_booking_product_id_sql_cmd =
 	$wpdb->get_results( $booking_product_id_sql_cmd, ARRAY_A);
 }
 
-
+}
 /**
  * reduce_sql_array_by_one_dimension - This function reduces the sql command it takes by one dimension because the sql is queued with one exta dimension we don't need. 
  * 
