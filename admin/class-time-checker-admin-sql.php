@@ -246,7 +246,7 @@ $array_booking_product_id_sql_cmd =
 	$wpdb->get_results( $booking_product_id_sql_cmd, ARRAY_A);
 }
 
-}
+
 /**
  * reduce_sql_array_by_one_dimension - This function reduces the sql command it takes by one dimension because the sql is queued with one exta dimension we don't need. 
  * 
@@ -254,7 +254,7 @@ $array_booking_product_id_sql_cmd =
  * @access public
  * @return void
  */
-function reduce_sql_array_by_one_dimension($arrayParam){
+public static function reduce_sql_array_by_one_dimension($arrayParam){
 	foreach ( $arrayParam as $arrayThing ) {
 		$new_array[] = $arrayThing["post_id"];
 	}
@@ -265,7 +265,7 @@ function reduce_sql_array_by_one_dimension($arrayParam){
 
 
 
-
+public static function find_ids(){
 
 
 
@@ -304,7 +304,7 @@ $sql_find_child_wcb_array = $wpdb->get_results($sql_find_child_booking,  ARRAY_A
 
 
 var_dump($sql_find_child_wcb_array);
-
+}
 
 // This is going to take in 2 arrays as well as $product_id
 /**
@@ -314,13 +314,12 @@ var_dump($sql_find_child_wcb_array);
  * @access public
  * @return void
  */
-function array_level_output($sql_find_child_wcb_array){
+public static function array_level_output($sql_find_child_wcb_array){
 	for ($i = 0; $i < count($sql_find_child_wcb_array); $i++) {
 	  echo  $sql_find_child_wcb_array[$i]["meta_key"] . ": "  .   $sql_find_child_wcb_array[$i]["meta_value"] .  " 511 <br><br>" ;
 
 	}
 }
-array_level_output($sql_find_child_wcb_array);
 
 
 
@@ -334,7 +333,7 @@ array_level_output($sql_find_child_wcb_array);
  * @access public
  * @return void
  */
-function split_array_into_twos ($sql_find_child_wcb_array){
+public static function split_array_into_twos ($sql_find_child_wcb_array){
 	$split_two_array = array();
 
 	$group_size = 2;
@@ -349,7 +348,7 @@ function split_array_into_twos ($sql_find_child_wcb_array){
 }
 
 
-var_dump(split_array_into_twos($sql_find_child_wcb_array));
+//var_dump(split_array_into_twos($sql_find_child_wcb_array));
 
 
 
@@ -362,7 +361,7 @@ var_dump(split_array_into_twos($sql_find_child_wcb_array));
  * @access public
  * @return void
  */
-function pair_parent_with_child($array_wp_postmeta_child, $parent_post_array_return, $product_id){
+public static function pair_parent_with_child($array_wp_postmeta_child, $parent_post_array_return, $product_id){
 	
 	$wc_purchase_ids = array();
 
@@ -384,65 +383,35 @@ function pair_parent_with_child($array_wp_postmeta_child, $parent_post_array_ret
 }
 
 
-var_dump(pair_parent_with_child(reduce_sql_array_by_one_dimension($array_booking_product_id_sql_cmd), $parent_post_array_return, $product_id ));
-
-
+public static function find_assoc_array(){
 $to_assign_assoc_array = pair_parent_with_child(reduce_sql_array_by_one_dimension($array_booking_product_id_sql_cmd), $parent_post_array_return, $product_id );
 
+}
 
 
 
 
 
-/**
- * This is the part where I work on writing data to a file. 
- * To develop scripts elsewhere.
- *
- * */
-
-
-
-$bt8836 = array("booking-start" => "20220110180000", "booking-end" => "20220110190000"   );
-
-
-
-$json = json_encode($bt8836); 
-
-
-file_put_contents("target-array-struct.json", $json);
 
 
 // This works only once the the file is not in the folder. Basically, cannot update but only start // a new.
-function create_json_file ( $array_param_one){
+public function create_json_file ( $array_param_one){
 	$dir = WP_PLUGIN_DIR . '/woocommerce-order-manager-assign';
 	$target_file = $dir . '/array-struct.json';
-
-
 	// encode array to json
 	$json = json_encode($array_param_one);
 	//display it
 	//generate json file
 	if (!file_exists($target_file)){
-
 			fopen($target_file, "w");
-
 		file_put_contents($target_file, $json);
 	}
+// It would be called like this.
+//create_json_file(pair_parent_with_child(reduce_sql_array_by_one_dimension($array_booking_product_id_sql_cmd), $parent_post_array_return, $product_id ));
+
 }
 
-create_json_file(pair_parent_with_child(reduce_sql_array_by_one_dimension($array_booking_product_id_sql_cmd), $parent_post_array_return, $product_id ));
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+}
