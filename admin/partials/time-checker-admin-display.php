@@ -72,7 +72,11 @@ $sql_queue = new SQL_Init_Request();
 	<h1>&nbsp;</h1>
 
 
-<?php /*
+<?php 
+// there's a fatal error coming from match p.m._or am so I have to discover that and link it. 
+
+
+/*
 <!--
 <p>Enter Begining Hours:</p> 
 	<select name="courseName" id="courseNameId">
@@ -98,12 +102,6 @@ $sql_queue = new SQL_Init_Request();
 
 
 <h1>&nbsp;</h1>
-
-<?php 
-
-
-submit_button();
-?>
 
 </form>
 
