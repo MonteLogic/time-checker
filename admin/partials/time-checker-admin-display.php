@@ -23,6 +23,7 @@
  */
 global $wpdb;
 
+include plugin_dir_path( __DIR__ ) . 'class-time-checker-admin.php';
 include plugin_dir_path( __DIR__ ) . 'class-time-checker-admin-sql.php';
 $dir = WP_PLUGIN_DIR . '/time-checker';
 
@@ -72,12 +73,10 @@ $sql_queue = new SQL_Init_Request();
 	<h1>&nbsp;</h1>
 
 
-<?php 
+
+
+
 // there's a fatal error coming from match p.m._or am so I have to discover that and link it. 
-
-
-/*
-<!--
 <p>Enter Begining Hours:</p> 
 	<select name="courseName" id="courseNameId">
 	<?php foreach (match_pm_or_am($array_unique_time_starts_no_repeats) as $hour_end ) : ?>
@@ -93,10 +92,7 @@ $sql_queue = new SQL_Init_Request();
 	</select>
 	<h1>&nbsp;</h1>
 
-<?php submit_button();?>
 
-
- */?>
 
 <input type ="submit">
 
