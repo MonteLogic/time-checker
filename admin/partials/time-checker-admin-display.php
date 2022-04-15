@@ -21,7 +21,7 @@
  * @package    Course_Manager
  * @subpackage Course_Manager/admin/partials
  */
-
+global $wpdb;
 
 include plugin_dir_path( __DIR__ ) . 'class-time-checker-admin-sql.php';
 $dir = WP_PLUGIN_DIR . '/time-checker';
@@ -71,6 +71,9 @@ $sql_queue = new SQL_Init_Request();
 	</select>
 	<h1>&nbsp;</h1>
 
+
+<?php /*
+<!--
 <p>Enter Begining Hours:</p> 
 	<select name="courseName" id="courseNameId">
 	<?php foreach (match_pm_or_am($array_unique_time_starts_no_repeats) as $hour_end ) : ?>
@@ -85,18 +88,22 @@ $sql_queue = new SQL_Init_Request();
 	<?php endforeach; ?>
 	</select>
 	<h1>&nbsp;</h1>
+
+<?php submit_button();?>
+
+
+ */?>
+
 <input type ="submit">
-</form>
 
 
 <h1>&nbsp;</h1>
 
+<?php 
 
 
+submit_button();
+?>
 
-<?php
-// This is for the terminal
-$a = readline('Enter a string: ');
- 
-// For output
-echo $a;   
+</form>
+
