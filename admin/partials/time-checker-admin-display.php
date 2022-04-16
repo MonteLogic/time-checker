@@ -22,9 +22,7 @@
  * @subpackage Course_Manager/admin/partials
  */
 global $wpdb;
-
-include plugin_dir_path( __DIR__ ) . 'class-time-checker-admin.php';
-include plugin_dir_path( __DIR__ ) . 'class-time-checker-admin-sql.php';
+// I have to include this file below into different file because there should be no include statement here.
 $dir = WP_PLUGIN_DIR . '/time-checker';
 
 

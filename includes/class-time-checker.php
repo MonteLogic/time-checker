@@ -111,10 +111,20 @@ class Time_Checker {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-time-checker-i18n.php';
 
-		/**
+			/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-time-checker-admin.php';
+
+			/**
+		 * The class responsible for defining sql actions that occur in the admin area.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-time-checker-admin-sql.php';
+		
+
+
+
+
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
