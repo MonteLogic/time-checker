@@ -77,14 +77,14 @@ $sql_queue = new SQL_Init_Request();
 // there's a fatal error coming from match p.m._or am so I have to discover that and link it. 
 <p>Enter Begining Hours:</p> 
 	<select name="courseName" id="courseNameId">
-	<?php foreach (match_pm_or_am($array_unique_time_starts_no_repeats) as $hour_end ) : ?>
+	<?php foreach (SQL_Init_Request::match_pm_or_am($array_unique_time_starts_no_repeats) as $hour_end ) : ?>
 	<option value="<?php echo $hour_end; ?>"><?php echo $hour_end; ?></option>
   	<?php endforeach; ?>
   	</select>
 
 <p>Enter Ending Hours:</p> 
 	<select name="courseName" id="courseNameId">
-	<?php foreach (match_pm_or_am($array_unique_time_ends_no_repeats ) as $hour_end ) : ?>
+	<?php foreach (SQL_Init_Request::match_pm_or_am($array_unique_time_ends_no_repeats ) as $hour_end ) : ?>
 	<option value="<?php echo $hour_end; ?>"><?php echo $hour_end; ?></option>
 	<?php endforeach; ?>
 	</select>
