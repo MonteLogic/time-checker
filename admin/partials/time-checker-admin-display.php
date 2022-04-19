@@ -34,7 +34,12 @@ $dir = WP_PLUGIN_DIR . '/time-checker';
 // There needs to be logic here that executes and shows the possible times for the dropdown.
 // For enterting beginning/ending hours. 
 // 
-$sql_queue = new SQL_Init_Request(); 
+$sql_queue = new SQL_Init_Request();
+
+
+$array_unique_time_starts_no_repeats = 
+
+
 ?>
 
 
@@ -72,9 +77,8 @@ $sql_queue = new SQL_Init_Request();
 
 
 
+<!--it would be dope if I could record a voice message on g-drive have it be here and then I click on it and it opens a window where it reads out what I said.   -->
 
-
-// there's a fatal error coming from match p.m._or am so I have to discover that and link it. 
 <p>Enter Begining Hours:</p> 
 	<select name="courseName" id="courseNameId">
 	<?php foreach (SQL_Init_Request::match_pm_or_am($array_unique_time_starts_no_repeats) as $hour_end ) : ?>
