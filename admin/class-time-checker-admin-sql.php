@@ -103,21 +103,24 @@ public static function get_sql_vars_two() {
 
 	global $wpdb;
 
-// Why is line 107 not prefix?`
-// Start booking start variables.
-$all_booking_starts_sql_command = "SELECT * FROM {$wpdb->prefix}postmeta WHERE meta_key = '_booking_start'";
-$all_booking_starts_row = $wpdb->get_results($all_booking_starts_sql_command, ARRAY_A);
-$array_unique_time_starts = array_unique(self::fill_all_booking_times($all_booking_starts_row));
- $array_unique_time_starts_no_repeats = array_unique(self::turn_into_units($array_unique_time_starts));
+	// toDo: I'm going to have to make then ending var a return value. 
+	// Start booking start variables.
+	$all_booking_starts_sql_command = 
+				"SELECT * FROM {$wpdb->prefix}postmeta WHERE meta_key = '_booking_start'";
+	$all_booking_starts_row = $wpdb->get_results($all_booking_starts_sql_command, ARRAY_A);
+	$array_unique_time_starts = array_unique(self::fill_all_booking_times($all_booking_starts_row));
+ 	$array_unique_time_starts_no_repeats = array_unique(self::turn_into_units($array_unique_time_starts));
 
-// Start booking end variables. 
-$all_booking_ends_sql_command = 
+	// Start booking end variables. 
+	$all_booking_ends_sql_command = 
 				"SELECT * FROM {$wpdb->prefix}postmeta WHERE meta_key = '_booking_end'";
-$all_booking_ends_row = $wpdb->get_results($all_booking_ends_sql_command, ARRAY_A);
-$array_unique_time_ends = array_unique(self::fill_all_booking_times($all_booking_ends_row));
-$array_unique_time_ends_no_repeats = array_unique(self::turn_into_units($array_unique_time_ends));
+	$all_booking_ends_row = $wpdb->get_results($all_booking_ends_sql_command, ARRAY_A);
+	$array_unique_time_ends = array_unique(self::fill_all_booking_times($all_booking_ends_row));
+	$array_unique_time_ends_no_repeats = array_unique(self::turn_into_units($array_unique_time_ends));
 
-}
+	return array($array_unique_time_starts_no_repeats , $array_unique_time_ends_no_repeats );
+
+	}
 
 
 
