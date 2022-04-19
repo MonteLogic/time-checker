@@ -37,7 +37,15 @@ $dir = WP_PLUGIN_DIR . '/time-checker';
 $sql_queue = new SQL_Init_Request();
 
 
-$array_unique_time_starts_no_repeats = 
+// I should be able to call get_sql_vars_two() and have the file automatically know 
+// $all_booking_starts_sql_command exists. 
+//
+SQL_Init_Request::get_sql_vars_two();
+
+
+
+print_r($array_unique_time_starts_no_repeats);
+
 
 
 ?>

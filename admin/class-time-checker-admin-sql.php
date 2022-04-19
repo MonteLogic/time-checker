@@ -23,7 +23,6 @@
 
 // Once this class is instantiated the variables will be in scope. 
 
-global $wpdb;
 
 
 
@@ -32,8 +31,7 @@ class SQL_Init_Request{
 	
 public function __construct()
 {
-    global $wpdb;
-    $this->wpdb = $wpdb;
+// empty
 }
 
 // Start booking_start logic.
@@ -103,12 +101,13 @@ public static function match_pm_or_am($hour_unit_array){
 
 public static function get_sql_vars_two() {
 
+	global $wpdb;
 
-$all_booking_starts_sql_command = "SELECT * FROM {$this->wpdb->get_results()}postmeta WHERE meta_key = '_booking_start'";
 
+$all_booking_starts_sql_command = "SELECT * FROM {$wpdb->get_results()}postmeta WHERE meta_key = '_booking_start'";
 
 // Start booking start variables.
-$all_booking_starts_sql_command = "SELECT * FROM {$this->wpdb->get_results()}postmeta WHERE meta_key = '_booking_start'";
+$all_booking_starts_sql_command = "SELECT * FROM {$wpdb->get_results()}postmeta WHERE meta_key = '_booking_start'";
 $all_booking_starts_row = $wpdb->get_results($all_booking_starts_sql_command, ARRAY_A);
 $array_unique_time_starts = array_unique(fill_all_booking_times($all_booking_starts_row));
  $array_unique_time_starts_no_repeats = array_unique(turn_into_units($array_unique_time_starts));
