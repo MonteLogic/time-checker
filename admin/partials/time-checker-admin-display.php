@@ -40,14 +40,12 @@ $sql_queue = new SQL_Init_Request();
 // I should be able to call get_sql_vars_two() and have the file automatically know 
 // $all_booking_starts_sql_command exists. 
 
-var_dump(SQL_Init_Request::get_sql_vars_two());
 $array_unique_time_starts_no_repeats = SQL_Init_Request::get_sql_vars_two()[0];
 $array_unique_time_ends_no_repeats = SQL_Init_Request::get_sql_vars_two()[1];
 
 
 
 
-var_dump($array_unique_time_starts_no_repeats);
 
 
 
