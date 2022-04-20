@@ -115,8 +115,19 @@ $array_unique_time_ends_no_repeats = SQL_Init_Request::get_sql_vars_two()[1];
 
 <?php
 
+// $array_booking_product_id_sql_cmd =
+// $wpdb->get_results( $booking_product_id_sql_cmd, ARRAY_A);
+// }
+
+
+$array_booking_product_id_sql_cmd =
+ SQL_Post_Request::find_metadata_sql();
+
+
+
 $a1 = array();
-//$a1 = pair_parent_with_child(reduce_sql_array_by_one_dimension($array_booking_product_id_sql_cmd), $parent_post_array_return, $product_id);
+$a1 = SQL_Post_Request::pair_parent_with_child(SQL_Post_Request::reduce_sql_array_by_one_dimension($array_booking_product_id_sql_cmd), $parent_post_array_return, $product_id);
+
 
 
 //writing post-submit logic
