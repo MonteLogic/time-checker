@@ -115,8 +115,15 @@ $array_unique_time_ends_no_repeats = SQL_Init_Request::get_sql_vars_two()[1];
 
 <?php
 
+$a1 = array();
+//$a1 = pair_parent_with_child(reduce_sql_array_by_one_dimension($array_booking_product_id_sql_cmd), $parent_post_array_return, $product_id);
+
+
 //writing post-submit logic
 SQL_Post_Request::fill_a1_simple_array($a1);
+
+
+
 
 
 
