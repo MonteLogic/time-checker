@@ -275,12 +275,16 @@ public static function reduce_sql_array_by_one_dimension($arrayParam){
 
 
 
-public static function find_ids(){
+public static function find_ids($array_booking_product_id_sql_cmd){
 /**
  * This takes all the ids who bought $product_id reduces it to a string for a subsequent sql statement query
  * This variable is used to search through wp_posts table.  
  */
-$ids = implode(', ',  reduce_sql_array_by_one_dimension($array_booking_product_id_sql_cmd));
+var_dump( self::reduce_sql_array_by_one_dimension($array_booking_product_id_sql_cmd));
+
+
+$ids = implode(', ',  self::reduce_sql_array_by_one_dimension($array_booking_product_id_sql_cmd));
+
 
 
 /**
@@ -301,10 +305,16 @@ SELECT meta_key, meta_value, post_id  FROM wp_postmeta WHERE post_id IN ('.$ids.
 AND meta_key NOT IN
 ( "_edit_lock", "rs_page_bg_color", "_wc_bookings_gcalendar_event_id", "_booking_resource_id", "_booking_customer_id", "_booking_parent_id","_booking_all_day","_booking_cost","_booking_order_item_id","_booking_persons","_booking_product_id","_local_timezone","_edit_last")
 ';
+
+// I feel like this should be returned as well but I'm going to go up for now. 
 $sql_find_child_wcb_array = $wpdb->get_results($sql_find_child_booking,  ARRAY_A);
 
 
-var_dump($sql_find_child_wcb_array);
+
+return $sql_parent_array; 
+
+
+
 }
 
 // This is going to take in 2 arrays as well as $product_id

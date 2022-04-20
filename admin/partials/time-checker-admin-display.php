@@ -115,13 +115,41 @@ $array_unique_time_ends_no_repeats = SQL_Init_Request::get_sql_vars_two()[1];
 
 <?php
 
+if(isset($_POST["date"]) && isset($_POST["course_name"])){ 
+
+
+  $array_unique_time_unit = $_POST['date'];
+  $month = substr($array_unique_time_unit,0,2);
+  $day = substr($array_unique_time_unit,3,2);
+  $year = substr($array_unique_time_unit,6);
+  echo $month.$day.$year;
+  $day_start    = strtotime( 'midnight', strtotime( $day ) );
+  $day_end      = strtotime( 'midnight +1 day', strtotime( $day ) ) - 1;
+
+  $findDateBooking = new  WC_Bookings_Calendar();
+
+  $product_filter  = isset( $_REQUEST['filter_bookings_product'] ) ? absint( $_REQUEST['filter_bookings_product'] ) : '';
+  
+  $booking_filter = array();
+  if ( $product_filter ) {
+     array_push( $booking_filter, $product_filter );
+  }
+//   $events = array();
+
+
+
+  $product_id = $_POST['course_name'];
+ 
 // $array_booking_product_id_sql_cmd =
 // $wpdb->get_results( $booking_product_id_sql_cmd, ARRAY_A);
 // }
 
 
 $array_booking_product_id_sql_cmd =
- SQL_Post_Request::find_metadata_sql();
+	SQL_Post_Request::find_metadata_sql();
+
+$parent_post_array_return = 
+	SQL_Post_Request::find_ids($array_booking_product_id_sql_cmd);
 
 
 
@@ -139,4 +167,4 @@ SQL_Post_Request::fill_a1_simple_array($a1);
 
 
 
-
+}
