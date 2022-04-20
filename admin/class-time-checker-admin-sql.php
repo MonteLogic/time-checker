@@ -129,14 +129,22 @@ public static function get_sql_vars_two() {
 
 class SQL_Post_Request {
 
+/**
+ * fill_a1_simple_array - 
+ * 
+ * @param mixed $a1 - Param appears to be records  matching WC with a proper wcb id. 
+ *$a1 =  pair_parent_with_child(reduce_sql_array_by_one_dimension($array_booking_product_id_sql_cmd), $parent_post_array_return, $product_id ));
 
-public static function fill_a2_simple_array($a2){
-	$a2_simple_array_wcb = array();
-
-	for ($i = 0; $i < count($a2); $i++) {
-		$a2_simple_array_wcb[] = $a2[$i]["wcb"]; 
+ * @access public
+ * @return array
+ */
+// Unimp
+public static function fill_a1_simple_array($a1){
+	$a1_simple_array_wcb = array();
+	for ($i = 0; $i < count($a1); $i++) {
+		$a1_simple_array_wcb[] = $a1[$i]["wcb"]; 
 	}
-	return $a2_simple_array_wcb;
+	return $a1_simple_array_wcb;
 }
 
 public static function fill_a3_simple_array($a3){

@@ -112,3 +112,13 @@ $array_unique_time_ends_no_repeats = SQL_Init_Request::get_sql_vars_two()[1];
 
 </form>
 
+
+<?php
+
+//writing post-submit logic
+SQL_Post_Request::fill_a1_simple_array($a1);
+
+
+
+
+
