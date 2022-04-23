@@ -1,11 +1,5 @@
 # time-checker
-Supplemental plugin for WooCommerce Bookings
-
-
-Creating `$array_unique_time_starts_no_repeats`
-So it can be a valid parameter.	
-
-`$array_unique_time_starts_no_repeats = array_unique(    turn_into_units($array_unique_time_starts));`
-
 I have to fix the null on line 283. So the function on 286 can read a valid param.
 
+
+Where does `$product_id` in the other forked project? 

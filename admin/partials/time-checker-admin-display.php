@@ -140,14 +140,15 @@ if(isset($_POST["date"]) && isset($_POST["course_name"])){
 
   $product_id = $_POST['course_name'];
  
-// $array_booking_product_id_sql_cmd =
-// $wpdb->get_results( $booking_product_id_sql_cmd, ARRAY_A);
-// }
 
 
 $array_booking_product_id_sql_cmd =
-	SQL_Post_Request::find_metadata_sql();
+	SQL_Post_Request::find_metadata_sql($product_id);
+var_dump($array_booking_product_id_sql_cmd);
 
+
+
+// This is where the null value is coming from,
 $parent_post_array_return = 
 	SQL_Post_Request::find_ids($array_booking_product_id_sql_cmd);
 

@@ -187,7 +187,7 @@ $no_match_keys = array_keys($no_match_entries);
 
 
 
-public static function find_metadata_sql() {
+public static function find_metadata_sql($product_id) {
 	global $wpdb;	
 	// Find billing emails in the DB order table
 	$statuses = array_map( 'esc_sql', wc_get_is_paid_statuses() );
@@ -282,7 +282,7 @@ public static function find_ids($array_booking_product_id_sql_cmd){
  */
 var_dump( self::reduce_sql_array_by_one_dimension($array_booking_product_id_sql_cmd));
 
-
+// I have to figure out why this is outputting null.
 $ids = implode(', ',  self::reduce_sql_array_by_one_dimension($array_booking_product_id_sql_cmd));
 
 
