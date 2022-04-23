@@ -276,6 +276,8 @@ public static function reduce_sql_array_by_one_dimension($arrayParam){
 
 
 public static function find_ids($array_booking_product_id_sql_cmd){
+	
+global $wpdb;	
 /**
  * This takes all the ids who bought $product_id reduces it to a string for a subsequent sql statement query
  * This variable is used to search through wp_posts table.  
