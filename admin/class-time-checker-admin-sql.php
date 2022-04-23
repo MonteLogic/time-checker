@@ -377,7 +377,7 @@ public static function split_array_into_twos ($sql_find_child_wcb_array){
 public static function pair_parent_with_child($array_wp_postmeta_child, $parent_post_array_return, $product_id){
 	
 	$wc_purchase_ids = array();
-
+	var_dump($parent_post_array_return);
 	for ($i = 0; $i < count($parent_post_array_return); $i++) {
 		if( $parent_post_array_return[$i]["post_parent"] == 0 ){
 			echo $array_wp_postmeta_child[$i] . " did not buy " . $product_id . "<br><br>"; 
