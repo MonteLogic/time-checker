@@ -313,8 +313,7 @@ $sql_find_child_wcb_array = $wpdb->get_results($sql_find_child_booking,  ARRAY_A
 
 
 
-return $sql_parent_array; 
-
+return $parent_post_array_return; 
 
 
 }

@@ -148,7 +148,8 @@ var_dump($array_booking_product_id_sql_cmd);
 
 
 
-// This is where the null value is coming from,
+// This is just a string its not actually executing the sql command and 
+// returning what it queued. 
 $parent_post_array_return = 
 	SQL_Post_Request::find_ids($array_booking_product_id_sql_cmd);
 
