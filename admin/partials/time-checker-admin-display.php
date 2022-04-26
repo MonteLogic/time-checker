@@ -163,10 +163,10 @@ $a1 = SQL_Post_Request::pair_parent_with_child(SQL_Post_Request::reduce_sql_arra
 //writing post-submit logic
 SQL_Post_Request::fill_a1_simple_array($a1);
 
+var_dump(SQL_Post_Request::fill_a1_simple_array($a1));
 
+$to_assign_assoc_array = SQL_Post_Request::pair_parent_with_child(SQL_Post_Request::reduce_sql_array_by_one_dimension($array_booking_product_id_sql_cmd), $parent_post_array_return, $product_id );
 
-
-
-
+var_dump($to_assign_assoc_array);
 
 }
