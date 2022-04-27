@@ -147,41 +147,40 @@ public static function fill_a1_simple_array($a1){
 	return $a1_simple_array_wcb;
 }
 
-public static function fill_a3_simple_array($a3){
-	$a3_simple_array_wcb = array();
-
-	for ($i = 0; $i < count($a3); $i++) {
-		$a3_simple_array_wcb[] =
-		$a3[$i][0]["post_id"];
+/**
+ * fill_a2_simple_array - Make $a2 a simple array. Also avoids duplicates.
+ * 
+ * @param mixed $a2 
+ * @static
+ * @access public
+ * @return void
+ */
+public static function fill_a2_simple_array($a2){
+	$a2_simple_array_wcb = array();
+	for ($i = 0; $i < count($a2); $i++) {
+		if($i % 2 == 0){
+			$a2_simple_array_wcb[] =
+			$a2[$i]["post_id"];
+		}
 	}
-	return $a3_simple_array_wcb;
-}
-
-public static function no_match_entries(){
-
-$no_match_entries = 
-	array_diff(ill_a3_simple_array($a3), fill_a2_simple_array($a2));
-
-return $no_match_entries;
-
+	return $a2_simple_array_wcb;
 }
 
 
-
-public static function prune_a3($no_match_entries, $a3){
+public static function prune_a2($no_match_entries, $a2){
 $no_match_keys = array_keys($no_match_entries);
             
-	for ($i = 0; $i < count($a3); $i++) {
+	for ($i = 0; $i < count($a2); $i++) {
 		for
 		  ($j= 0;$j<count($no_match_entries);$j++)
 		  {
 			if  ($no_match_entries[$no_match_keys[$j]]
-			 == $a3[$i][0]["post_id"]){ 
-			 unset(  $a3[$i]);
+			 == $a2[$i][0]["post_id"]){ 
+			 unset(  $a2[$i]);
 			}
 		}
 	}
-	return $a3;
+	return $a2;
 }
 
 
@@ -270,7 +269,6 @@ public static function reduce_sql_array_by_one_dimension($arrayParam){
 	}
 	return $new_array;
 }
-//var_dump(reduce_sql_array_by_one_dimension($array_booking_product_id_sql_cmd));
 
 
 
@@ -312,9 +310,7 @@ AND meta_key NOT IN
 $sql_find_child_wcb_array = $wpdb->get_results($sql_find_child_booking,  ARRAY_A);
 
 
-
-return $parent_post_array_return; 
-
+return array($sql_find_child_wcb_array,	$parent_post_array_return);
 
 }
 
@@ -382,9 +378,6 @@ public static function pair_parent_with_child($array_wp_postmeta_child, $parent_
 			echo $array_wp_postmeta_child[$i] . " did not buy " . $product_id . "<br><br>"; 
 		}
 		else{	
-
-		
-		
 	        	 $wc_purchase_ids[] =  $wc_pairings =array( "wc" =>  $parent_post_array_return[$i]["post_parent"], "wcb" => $array_wp_postmeta_child[$i] );
 	
 			//$valid_wc_and_wcb_id = ($array_wp_postmeta_child[$i] => "Some value.");
@@ -395,11 +388,41 @@ public static function pair_parent_with_child($array_wp_postmeta_child, $parent_
 }
 
 
-public static function find_assoc_array(){
-$to_assign_assoc_array = pair_parent_with_child(reduce_sql_array_by_one_dimension($array_booking_product_id_sql_cmd), $parent_post_array_return, $product_id );
 
+
+
+
+function add_starts_ends($a1,$a2){
+$a2_keys = array_keys($a2);
+	for($i = 0; $i < count($a2); $i++) {
+		if($a1[$i]["wcb"] == $a2[$a2_keys[$i]][0]["post_id"]){
+			$a1[$i]["wcb"] = array( 
+				"wcb-id" =>$a1[$i]["wcb"], 
+				"_booking_start"=> 
+				$a2[$a2_keys[$i]][0]["meta_value"],
+				"_booking_end" =>  
+				$a2[$a2_keys[$i]][1]["meta_value"]
+			);
+		}
+		 
+		if($a1[$i]["wcb"] != $a2[$a2_keys[$i]][0]["post_id"] ){
+			$j=0;
+			for (;$j < count($a2); $j++) {
+				if( $a1[$i]["wcb"] == $a2[$a2_keys[$j]][0]["post_id"]){
+						$a1[$i]["wcb"] = array( 
+						"wcb-id" =>$a1[$i]["wcb"], 
+						"_booking_start"=> $a2[$j]
+						[0]["meta_value"],
+						"_booking_end" =>  $a2[$j]
+						[1]["meta_value"]
+					);
+					break;	
+				}
+			}
+		}	
+	}
+	return $a1;
 }
-
 
 
 

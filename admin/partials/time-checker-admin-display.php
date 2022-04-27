@@ -151,7 +151,7 @@ var_dump($array_booking_product_id_sql_cmd);
 // This is just a string its not actually executing the sql command and 
 // returning what it queued. 
 $parent_post_array_return = 
-	SQL_Post_Request::find_ids($array_booking_product_id_sql_cmd);
+	SQL_Post_Request::find_ids($array_booking_product_id_sql_cmd)[1];
 
 
 
@@ -159,14 +159,29 @@ $a1 = array();
 $a1 = SQL_Post_Request::pair_parent_with_child(SQL_Post_Request::reduce_sql_array_by_one_dimension($array_booking_product_id_sql_cmd), $parent_post_array_return, $product_id);
 
 
+// Begin a2 creation.
+$a2 = 
+	SQL_Post_Request::find_ids($array_booking_product_id_sql_cmd)[0];
 
-//writing post-submit logic
-SQL_Post_Request::fill_a1_simple_array($a1);
+var_dump($a2);
 
-var_dump(SQL_Post_Request::fill_a1_simple_array($a1));
 
-$to_assign_assoc_array = SQL_Post_Request::pair_parent_with_child(SQL_Post_Request::reduce_sql_array_by_one_dimension($array_booking_product_id_sql_cmd), $parent_post_array_return, $product_id );
+var_dump(SQL_Post_Request::fill_a2_simple_array($a2));
+$no_match_entries =
+array_diff(
+	 SQL_Post_Request::fill_a2_simple_array($a2),
+       	 SQL_Post_Request::fill_a1_simple_array($a1));
 
-var_dump($to_assign_assoc_array);
+// $no_match_entries is appropriate
+var_dump($no_match_entries);
+
+$a2 =  SQL_Post_Request::prune_a2($no_match_entries, $a2);
+
+
+$result = 
+SQL_Post_Request::add_starts_ends($a1,$a2);
+
+		var_dump($result);
+
 
 }
