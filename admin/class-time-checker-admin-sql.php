@@ -175,7 +175,7 @@ $no_match_keys = array_keys($no_match_entries);
 		  ($j= 0;$j<count($no_match_entries);$j++)
 		  {
 			if  ($no_match_entries[$no_match_keys[$j]]
-			 == $a2[$i][0]["post_id"]){ 
+			 == $a2[$i]["post_id"]){ 
 			 unset(  $a2[$i]);
 			}
 		}
@@ -395,7 +395,7 @@ public static function pair_parent_with_child($array_wp_postmeta_child, $parent_
 function add_starts_ends($a1,$a2){
 $a2_keys = array_keys($a2);
 	for($i = 0; $i < count($a2); $i++) {
-		if($a1[$i]["wcb"] == $a2[$a2_keys[$i]][0]["post_id"]){
+		if($a1[$i]["wcb"] == $a2[$a2_keys[$i]]["post_id"]){
 			$a1[$i]["wcb"] = array( 
 				"wcb-id" =>$a1[$i]["wcb"], 
 				"_booking_start"=> 
