@@ -264,6 +264,7 @@ public static function find_metadata_sql($product_id) {
  * @return void
  */
 public static function reduce_sql_array_by_one_dimension($arrayParam){
+	$new_array = array();
 	foreach ( $arrayParam as $arrayThing ) {
 		$new_array[] = $arrayThing["post_id"];
 	}

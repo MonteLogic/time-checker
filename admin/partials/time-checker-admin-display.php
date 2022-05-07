@@ -177,11 +177,15 @@ var_dump($no_match_entries);
 
 $a2 =  SQL_Post_Request::prune_a2($no_match_entries, $a2);
 
+var_dump($a2);
 
-$result = 
-SQL_Post_Request::add_starts_ends($a1,$a2);
+$array_combine = SQL_Post_Request::arrays_to_combine($a1,$a2);
 
-		var_dump($result);
+
+
+
+$ac_un_assoc = array_values($array_combine);
+//print_r($ac_un_assoc);
 
 
 }
