@@ -291,7 +291,8 @@ $ids = implode(', ',  self::reduce_sql_array_by_one_dimension($array_booking_pro
  * This sql query finds the parent_post for the booking, in the table wp_posts
  */
 
-$sql_parent_array = 'SELECT post_parent, post_date,post_status, post_name, post_type FROM wp_posts WHERE ID IN ('.$ids.')';
+$sql_parent_array = "SELECT post_parent, post_date,post_status, post_name, post_type FROM
+{$wpdb->prefix}posts WHERE ID IN ('.$ids.')";
 $parent_post_array_return = $wpdb->get_results($sql_parent_array, ARRAY_A);
 //var_dump($parent_post_array_return);
 
