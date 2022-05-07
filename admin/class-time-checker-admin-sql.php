@@ -300,11 +300,9 @@ $parent_post_array_return = $wpdb->get_results($sql_parent_array, ARRAY_A);
 /**
  * This variable finds the post_purchase_id for all wcb entries. 
  */
-$sql_find_child_booking ='
-SELECT meta_key, meta_value, post_id  FROM wp_postmeta WHERE post_id IN ('.$ids.')
+$sql_find_child_booking ="SELECT meta_key, meta_value, post_id  FROM {$wpdb->prefix}postmeta WHERE post_id IN ('.$ids.')
 AND meta_key NOT IN
-( "_edit_lock", "rs_page_bg_color", "_wc_bookings_gcalendar_event_id", "_booking_resource_id", "_booking_customer_id", "_booking_parent_id","_booking_all_day","_booking_cost","_booking_order_item_id","_booking_persons","_booking_product_id","_local_timezone","_edit_last")
-';
+( '_edit_lock', 'rs_page_bg_color', '_wc_bookings_gcalendar_event_id', '_booking_resource_id', '_booking_customer_id', '_booking_parent_id','_booking_all_day','_booking_cost','_booking_order_item_id','_booking_persons','_booking_product_id','_local_timezone','_edit_last')";
 
 // I feel like this should be returned as well but I'm going to go up for now. 
 $sql_find_child_wcb_array = $wpdb->get_results($sql_find_child_booking,  ARRAY_A);
@@ -392,40 +390,65 @@ public static function pair_parent_with_child($array_wp_postmeta_child, $parent_
 
 
 
-function add_starts_ends($a1,$a2){
-$a2_keys = array_keys($a2);
-	for($i = 0; $i < count($a2); $i++) {
-		if($a1[$i]["wcb"] == $a2[$a2_keys[$i]]["post_id"]){
-			$a1[$i]["wcb"] = array( 
-				"wcb-id" =>$a1[$i]["wcb"], 
-				"_booking_start"=> 
-				$a2[$a2_keys[$i]][0]["meta_value"],
-				"_booking_end" =>  
-				$a2[$a2_keys[$i]][1]["meta_value"]
-			);
-		}
-		 
-		if($a1[$i]["wcb"] != $a2[$a2_keys[$i]][0]["post_id"] ){
-			$j=0;
-			for (;$j < count($a2); $j++) {
-				if( $a1[$i]["wcb"] == $a2[$a2_keys[$j]][0]["post_id"]){
-						$a1[$i]["wcb"] = array( 
-						"wcb-id" =>$a1[$i]["wcb"], 
-						"_booking_start"=> $a2[$j]
-						[0]["meta_value"],
-						"_booking_end" =>  $a2[$j]
-						[1]["meta_value"]
-					);
-					break;	
-				}
+public static function arrays_to_combine($a1,$a2){
+	$array_to_combine = array();
+	$j =0;
+	$a2_un_assoc =  array_values($a2);
+	print_r($a2_un_assoc);
+	for($i = 0; $i < count($a1); $i++) {
+
+		if( isset( $a1[$i]["wcb"] ) 
+			&& 
+			isset($a2_un_assoc[$j]["post_id"])
+			&&
+			isset($a2_un_assoc[$j+1]["post_id"]))	
+			{
+			echo " i = $i ";
+			echo " j = $j ";
+			echo $a2_un_assoc[$j]["post_id"];
+
+
+			if (($a1[$i]["wcb"] == 
+				$a2_un_assoc[$j]["post_id"])
+				&&
+				($a2_un_assoc[$j+1]["post_id"]
+				== 
+				$a1[$i]["wcb"])
+				){
+
+				$combined_array[$j] = array(	
+				"wcb_id" =>	
+				$a2_un_assoc[$j]["post_id"],
+				"booking_start" =>	
+					$a2_un_assoc[$j]["meta_value"],
+
+
+				// Starting +1 side
+				"booking_end" =>	
+					$a2_un_assoc[$j+1]["meta_value"],
+				"wc_id" => 	
+					$a1[$i]["wc"]
+				
+				);	
 			}
-		}	
+		}
+
+		 if ($i == count($a2) - 1){ 
+
+			$i = -1;
+			$j++;
+			echo PHP_EOL;
+			if( $j == count($a2)){
+			echo "j or $j is at count of". 
+			count($a2);
+			// This whole for loop should be exited.
+				return $combined_array; 
+		 	
+		 }
 	}
-	return $a1;
+	echo PHP_EOL;
+	}
 }
-
-
-
 
 
 
