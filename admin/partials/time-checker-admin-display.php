@@ -162,9 +162,20 @@ $a1 = SQL_Post_Request::pair_parent_with_child(SQL_Post_Request::reduce_sql_arra
 // Begin a2 creation.
 $a2 = 
 	SQL_Post_Request::find_ids($array_booking_product_id_sql_cmd)[0];
+echo PHP_EOL;
+echo PHP_EOL;
+echo PHP_EOL;
+echo PHP_EOL;
+echo PHP_EOL;
 
+echo "<br>";
+echo "<br>";
+echo "<br>";
+echo "508";
 var_dump($a2);
 
+echo "<br>";
+echo "509";
 
 var_dump(SQL_Post_Request::fill_a2_simple_array($a2));
 $no_match_entries =
@@ -184,7 +195,7 @@ $array_combine = SQL_Post_Request::arrays_to_combine($a1,$a2);
 
 
 
-$ac_un_assoc = array_values($array_combine);
+//$ac_un_assoc = array_values($array_combine);
 //print_r($ac_un_assoc);
 
 
