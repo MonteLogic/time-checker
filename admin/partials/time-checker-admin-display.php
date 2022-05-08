@@ -158,6 +158,7 @@ $parent_post_array_return =
 $a1 = array();
 $a1 = SQL_Post_Request::pair_parent_with_child(SQL_Post_Request::reduce_sql_array_by_one_dimension($array_booking_product_id_sql_cmd), $parent_post_array_return, $product_id);
 
+var_dump($a1);
 
 // Begin a2 creation.
 $a2 = 
@@ -190,13 +191,12 @@ $a2 =  SQL_Post_Request::prune_a2($no_match_entries, $a2);
 
 var_dump($a2);
 
-$array_combine = SQL_Post_Request::arrays_to_combine($a1,$a2);
+$combined_array = SQL_Post_Request::arrays_to_combine($a1,$a2);
+//var_dump($combined_array);
 
 
-
-
-//$ac_un_assoc = array_values($array_combine);
-//print_r($ac_un_assoc);
+$combine_un_assoc = array_values($combined_array);
+var_dump($combine_un_assoc);
 
 
 }

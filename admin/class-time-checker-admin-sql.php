@@ -396,11 +396,23 @@ public static function pair_parent_with_child($array_wp_postmeta_child, $parent_
 
 
 public static function arrays_to_combine($a1,$a2){
-	$array_to_combine = array();
+	$combined_array = array();
 	$j =0;
+	echo "512";
+	echo PHP_EOL;
+	echo count($a2);
+	echo PHP_EOL;
+	echo count($a1);
+	$counter = 0;
+	if ( count($a1) > count($a2)  ){
+		$counter = count($a1);
+	}
+	if ( count($a2) > count($a1)    ){
+		$counter = count($a2);
+	}
 	$a2_un_assoc =  array_values($a2);
-	print_r($a2_un_assoc);
-	for($i = 0; $i < count($a1); $i++) {
+	var_dump($a2_un_assoc);
+	for($i = 0; $i < $counter; $i++) {
 
 		if( isset( $a1[$i]["wcb"] ) 
 			&& 
@@ -438,14 +450,15 @@ public static function arrays_to_combine($a1,$a2){
 			}
 		}
 
-		 if ($i == count($a2) - 1){ 
+		 if ($i ==  $counter - 1){ 
 
 			$i = -1;
 			$j++;
 			echo PHP_EOL;
-			if( $j == count($a2)){
+			echo "520";
+			if( $j == $counter){
 			echo "j or $j is at count of". 
-			count($a2);
+			$counter;
 			// This whole for loop should be exited.
 				return $combined_array; 
 		 	
