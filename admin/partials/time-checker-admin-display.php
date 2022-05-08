@@ -144,7 +144,6 @@ if(isset($_POST["date"]) && isset($_POST["course_name"])){
 
 $array_booking_product_id_sql_cmd =
 	SQL_Post_Request::find_metadata_sql($product_id);
-var_dump($array_booking_product_id_sql_cmd);
 
 
 
@@ -158,41 +157,25 @@ $parent_post_array_return =
 $a1 = array();
 $a1 = SQL_Post_Request::pair_parent_with_child(SQL_Post_Request::reduce_sql_array_by_one_dimension($array_booking_product_id_sql_cmd), $parent_post_array_return, $product_id);
 
-var_dump($a1);
 
 // Begin a2 creation.
 $a2 = 
 	SQL_Post_Request::find_ids($array_booking_product_id_sql_cmd)[0];
-echo PHP_EOL;
-echo PHP_EOL;
-echo PHP_EOL;
-echo PHP_EOL;
-echo PHP_EOL;
+//echo "508";
 
-echo "<br>";
-echo "<br>";
-echo "<br>";
-echo "508";
-var_dump($a2);
+//echo "509";
 
-echo "<br>";
-echo "509";
-
-var_dump(SQL_Post_Request::fill_a2_simple_array($a2));
 $no_match_entries =
 array_diff(
 	 SQL_Post_Request::fill_a2_simple_array($a2),
        	 SQL_Post_Request::fill_a1_simple_array($a1));
 
 // $no_match_entries is appropriate
-var_dump($no_match_entries);
 
 $a2 =  SQL_Post_Request::prune_a2($no_match_entries, $a2);
 
-var_dump($a2);
 
 $combined_array = SQL_Post_Request::arrays_to_combine($a1,$a2);
-//var_dump($combined_array);
 
 
 $combine_un_assoc = array_values($combined_array);

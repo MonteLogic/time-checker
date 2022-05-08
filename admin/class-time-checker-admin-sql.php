@@ -281,11 +281,9 @@ global $wpdb;
  * This takes all the ids who bought $product_id reduces it to a string for a subsequent sql statement query
  * This variable is used to search through wp_posts table.  
  */
-var_dump( self::reduce_sql_array_by_one_dimension($array_booking_product_id_sql_cmd));
 
 // I have to figure out why this is outputting null.
 $ids = implode(', ',  self::reduce_sql_array_by_one_dimension($array_booking_product_id_sql_cmd));
-var_dump($ids);
 
 
 
@@ -297,8 +295,7 @@ $sql_parent_array =
 	"SELECT post_parent, post_date,post_status, post_name, post_type FROM
 {$wpdb->prefix}posts WHERE ID IN ($ids)";
 $parent_post_array_return = $wpdb->get_results($sql_parent_array, ARRAY_A);
-echo "611";
-var_dump($parent_post_array_return);
+//echo "611";
 
 
 
@@ -359,7 +356,6 @@ public static function split_array_into_twos ($sql_find_child_wcb_array){
 }
 
 
-//var_dump(split_array_into_twos($sql_find_child_wcb_array));
 
 
 
@@ -375,10 +371,9 @@ public static function split_array_into_twos ($sql_find_child_wcb_array){
 public static function pair_parent_with_child($array_wp_postmeta_child, $parent_post_array_return, $product_id){
 	
 	$wc_purchase_ids = array();
-	var_dump($parent_post_array_return);
 	for ($i = 0; $i < count($parent_post_array_return); $i++) {
 		if( $parent_post_array_return[$i]["post_parent"] == 0 ){
-			echo $array_wp_postmeta_child[$i] . " did not buy " . $product_id . "<br><br>"; 
+			//echo $array_wp_postmeta_child[$i] . " did not buy " . $product_id . "<br><br>"; 
 		}
 		else{	
 	        	 $wc_purchase_ids[] =  $wc_pairings =array( "wc" =>  $parent_post_array_return[$i]["post_parent"], "wcb" => $array_wp_postmeta_child[$i] );
@@ -398,11 +393,11 @@ public static function pair_parent_with_child($array_wp_postmeta_child, $parent_
 public static function arrays_to_combine($a1,$a2){
 	$combined_array = array();
 	$j =0;
-	echo "512";
-	echo PHP_EOL;
-	echo count($a2);
-	echo PHP_EOL;
-	echo count($a1);
+	//echo "512";
+	//echo PHP_EOL;
+	//echo count($a2);
+	//echo PHP_EOL;
+	//echo count($a1);
 	$counter = 0;
 	if ( count($a1) > count($a2)  ){
 		$counter = count($a1);
@@ -411,7 +406,6 @@ public static function arrays_to_combine($a1,$a2){
 		$counter = count($a2);
 	}
 	$a2_un_assoc =  array_values($a2);
-	var_dump($a2_un_assoc);
 	for($i = 0; $i < $counter; $i++) {
 
 		if( isset( $a1[$i]["wcb"] ) 
@@ -420,9 +414,9 @@ public static function arrays_to_combine($a1,$a2){
 			&&
 			isset($a2_un_assoc[$j+1]["post_id"]))	
 			{
-			echo " i = $i ";
-			echo " j = $j ";
-			echo $a2_un_assoc[$j]["post_id"];
+			//echo " i = $i ";
+			//echo " j = $j ";
+			//echo $a2_un_assoc[$j]["post_id"];
 
 
 			if (($a1[$i]["wcb"] == 
@@ -454,10 +448,10 @@ public static function arrays_to_combine($a1,$a2){
 
 			$i = -1;
 			$j++;
-			echo PHP_EOL;
-			echo "520";
+			//echo PHP_EOL;
+			//echo "520";
 			if( $j == $counter){
-			echo "j or $j is at count of". 
+			//echo "j or $j is at count of". 
 			$counter;
 			// This whole for loop should be exited.
 				return $combined_array; 
