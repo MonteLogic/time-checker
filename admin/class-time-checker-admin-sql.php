@@ -294,9 +294,8 @@ var_dump($ids);
  */
 
 $sql_parent_array = 
- $wpdb->prepare(	
 	"SELECT post_parent, post_date,post_status, post_name, post_type FROM
-{$wpdb->prefix}posts WHERE ID IN ('$ids.')");
+{$wpdb->prefix}posts WHERE ID IN ('$ids.')";
 $parent_post_array_return = $wpdb->get_results($sql_parent_array, ARRAY_A);
 echo "611";
 var_dump($parent_post_array_return);
@@ -306,7 +305,7 @@ var_dump($parent_post_array_return);
 /**
  * This variable finds the post_purchase_id for all wcb entries. 
  */
-$sql_find_child_booking ="SELECT meta_key, meta_value, post_id  FROM {$wpdb->prefix}postmeta WHERE post_id IN ('.$ids.')
+$sql_find_child_booking =  "SELECT meta_key, meta_value, post_id  FROM {$wpdb->prefix}postmeta WHERE post_id IN ('$ids.')
 AND meta_key NOT IN
 ( '_edit_lock', 'rs_page_bg_color', '_wc_bookings_gcalendar_event_id', '_booking_resource_id', '_booking_customer_id', '_booking_parent_id','_booking_all_day','_booking_cost','_booking_order_item_id','_booking_persons','_booking_product_id','_local_timezone','_edit_last')";
 
