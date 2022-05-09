@@ -125,7 +125,8 @@ if(isset($_POST["date"]) && isset($_POST["course_name"])){
   $day = substr($array_unique_time_unit,3,2);
   $year = substr($array_unique_time_unit,6);
   echo "Date chosen = ";
-  echo $month.$day.$year;
+  $date_entered = $month.$day.$year;
+  echo $date_entered;
   // I might have already done what 
   // I want as far as the date output.
   $day_start    = strtotime( 'midnight', strtotime( $day ) );
@@ -188,6 +189,6 @@ var_dump($combine_un_assoc);
 // Create table from combine_un_assoc after 
 // a time filter is implemented.
 
-
+SQL_Post_Request::date_enter_filter($date_entered, $combine_un_assoc);
 
 }
