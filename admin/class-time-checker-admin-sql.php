@@ -301,7 +301,7 @@ $parent_post_array_return = $wpdb->get_results($sql_parent_array, ARRAY_A);
 
 /**
  * This variable finds the post_purchase_id for all wcb entries. 
- */
+ /
 $sql_find_child_booking =  "SELECT meta_key, meta_value, post_id  FROM {$wpdb->prefix}postmeta WHERE post_id IN ($ids)
 AND meta_key NOT IN
 ( '_edit_lock', 'rs_page_bg_color', '_wc_bookings_gcalendar_event_id', '_booking_resource_id', '_booking_customer_id', '_booking_parent_id','_booking_all_day','_booking_cost','_booking_order_item_id','_booking_persons','_booking_product_id','_local_timezone','_edit_last')";
@@ -464,24 +464,11 @@ public static function arrays_to_combine($a1,$a2){
 
 
 
-// This works only once the the file is not in the folder. Basically, cannot update but only start // a new.
-public function create_json_file ( $array_param_one){
-	$dir = WP_PLUGIN_DIR . '/woocommerce-order-manager-assign';
-	$target_file = $dir . '/array-struct.json';
-	// encode array to json
-	$json = json_encode($array_param_one);
-	//display it
-	//generate json file
-	if (!file_exists($target_file)){
-			fopen($target_file, "w");
-		file_put_contents($target_file, $json);
-	}
-// It would be called like this.
-//create_json_file(pair_parent_with_child(reduce_sql_array_by_one_dimension($array_booking_product_id_sql_cmd), $parent_post_array_return, $product_id ));
+
+public static function date_enter_filter($date_entered, $combine_un_assoc){
+
+
 
 }
-
-
-
 
 }

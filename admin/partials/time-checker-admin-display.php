@@ -117,12 +117,17 @@ $array_unique_time_ends_no_repeats = SQL_Init_Request::get_sql_vars_two()[1];
 
 if(isset($_POST["date"]) && isset($_POST["course_name"])){ 
 
+  echo "401";
+ // fumc here 
 
   $array_unique_time_unit = $_POST['date'];
   $month = substr($array_unique_time_unit,0,2);
   $day = substr($array_unique_time_unit,3,2);
   $year = substr($array_unique_time_unit,6);
+  echo "Date chosen = ";
   echo $month.$day.$year;
+  // I might have already done what 
+  // I want as far as the date output.
   $day_start    = strtotime( 'midnight', strtotime( $day ) );
   $day_end      = strtotime( 'midnight +1 day', strtotime( $day ) ) - 1;
 
@@ -154,7 +159,6 @@ $parent_post_array_return =
 
 
 
-$a1 = array();
 $a1 = SQL_Post_Request::pair_parent_with_child(SQL_Post_Request::reduce_sql_array_by_one_dimension($array_booking_product_id_sql_cmd), $parent_post_array_return, $product_id);
 
 
@@ -180,6 +184,10 @@ $combined_array = SQL_Post_Request::arrays_to_combine($a1,$a2);
 
 $combine_un_assoc = array_values($combined_array);
 var_dump($combine_un_assoc);
+
+// Create table from combine_un_assoc after 
+// a time filter is implemented.
+
 
 
 }
