@@ -465,13 +465,14 @@ public static function arrays_to_combine($a1,$a2){
 
 
 public static function date_enter_filter($date_entered, $combine_un_assoc){
+    echo 617;
 
     if(!$date_entered){
         echo "No date provided";
 
     }
     if($date_entered){
-        echo "A date was provided " . $date_entered;
+        echo "Date provided = " . $date_entered;
 
     }
     echo PHP_EOL;
@@ -479,8 +480,8 @@ public static function date_enter_filter($date_entered, $combine_un_assoc){
 
     // okay so I'm going to take the first one the first value for a 810and then I'm just going to put a laser focus on it and then see if it's in the book in her school starts so first I'm just going to Output the first value of a A10 the booking start time.
 
-    echo 617;
     echo PHP_EOL;
+	echo "first start time = ";
     echo $combine_un_assoc[0]["booking_start"];
 
 

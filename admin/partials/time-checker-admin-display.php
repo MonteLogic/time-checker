@@ -125,7 +125,8 @@ if(isset($_POST["date"]) && isset($_POST["course_name"])){
   $day = substr($array_unique_time_unit,3,2);
   $year = substr($array_unique_time_unit,6);
   echo "Date chosen = ";
-  $date_entered = $month.$day.$year;
+  //$date_entered = $month.$day.$year;
+  $date_entered = $year.$month.$day; 
   echo $date_entered;
   // I might have already done what 
   // I want as far as the date output.
