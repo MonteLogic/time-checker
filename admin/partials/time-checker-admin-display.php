@@ -126,14 +126,20 @@ isset($_POST["date"]) && isset($_POST["course_name"])
 ){ 
 
   echo "401";
+  echo "<br>";
+  echo "begin time = ";
   echo $_POST["begin_hours"];
+  echo "<br>";
   echo 402;
+  echo "<br>";
+  echo "end time = ";
   echo $_POST["end_hours"];
 
   echo "<br>";
 
 
   echo 403;
+  echo "<br>";
   $array_unique_time_unit = $_POST['date'];
   $month = substr($array_unique_time_unit,0,2);
   $day = substr($array_unique_time_unit,3,2);

@@ -477,14 +477,32 @@ public static function date_enter_filter($date_entered, $combine_un_assoc){
     }
     echo PHP_EOL;
     echo PHP_EOL;
+	for($i = 0; $i < count($combine_un_assoc); $i++) {
 
-    // okay so I'm going to take the first one the first value for a 810and then I'm just going to put a laser focus on it and then see if it's in the book in her school starts so first I'm just going to Output the first value of a A10 the booking start time.
+		
+		$data = $combine_un_assoc[0]["booking_start"];
+		$comparable = vsprintf("(%d)-%d-%d",sscanf($data, "%5d%3d%5d"));
+		echo "<br>";	
+		echo "<br>";	
+		echo 618;	
+		
+		echo "<br>";	
 
+		if ($date_entered != $comparable ){
+
+			echo $comparable;
+
+		}
+	}		
     echo PHP_EOL;
 	echo "first start time = ";
     echo $combine_un_assoc[0]["booking_start"];
-
-
 }
+
+
+
+
+
+
 
 }
