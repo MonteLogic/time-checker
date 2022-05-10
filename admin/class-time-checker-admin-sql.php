@@ -467,6 +467,8 @@ public static function arrays_to_combine($a1,$a2){
 public static function date_enter_filter($date_entered, $combine_un_assoc){
     echo 617;
 
+	$filtered_date = array();
+
     if(!$date_entered){
         echo "No date provided";
 
@@ -492,15 +494,14 @@ public static function date_enter_filter($date_entered, $combine_un_assoc){
 
 
 
-		if ($date_entered != $comparable ){
-
-			echo $comparable;
+		if ($date_snipped == $date_entered ){	
+			$filtered_date[] = $combine_un_assoc[$i];
+			echo 619;
 
 		}
 	}		
-    echo PHP_EOL;
-	echo "first start time = ";
-    echo $combine_un_assoc[0]["booking_start"];
+	echo 622;
+	var_dump($filtered_date);
 }
 
 
