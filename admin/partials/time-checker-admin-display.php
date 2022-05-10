@@ -89,14 +89,14 @@ $array_unique_time_ends_no_repeats = SQL_Init_Request::get_sql_vars_two()[1];
 <!--it would be dope if I could record a voice message on g-drive have it be here and then I click on it and it opens a window where it reads out what I said.   -->
 
 <p>Enter Begining Hours:</p> 
-	<select name="courseName" id="courseNameId">
+	<select name="begin_hours" id="courseNameId">
 	<?php foreach (SQL_Init_Request::match_pm_or_am($array_unique_time_starts_no_repeats) as $hour_end ) : ?>
 	<option value="<?php echo $hour_end; ?>"><?php echo $hour_end; ?></option>
   	<?php endforeach; ?>
   	</select>
 
 <p>Enter Ending Hours:</p> 
-	<select name="courseName" id="courseNameId">
+	<select name="end_hours" id="courseNameId">
 	<?php foreach (SQL_Init_Request::match_pm_or_am($array_unique_time_ends_no_repeats ) as $hour_end ) : ?>
 	<option value="<?php echo $hour_end; ?>"><?php echo $hour_end; ?></option>
 	<?php endforeach; ?>
@@ -115,11 +115,25 @@ $array_unique_time_ends_no_repeats = SQL_Init_Request::get_sql_vars_two()[1];
 
 <?php
 
-if(isset($_POST["date"]) && isset($_POST["course_name"])){ 
+if(
+isset($_POST["date"]) && isset($_POST["course_name"])
+&& isset($_POST["begin_hours"]) && isset($_POST["end_hours"])
+
+
+
+
+
+){ 
 
   echo "401";
- // fumc here 
+  echo $_POST["begin_hours"];
+  echo 402;
+  echo $_POST["end_hours"];
 
+  echo "<br>";
+
+
+  echo 403;
   $array_unique_time_unit = $_POST['date'];
   $month = substr($array_unique_time_unit,0,2);
   $day = substr($array_unique_time_unit,3,2);
