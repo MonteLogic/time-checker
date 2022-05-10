@@ -480,13 +480,17 @@ public static function date_enter_filter($date_entered, $combine_un_assoc){
 	for($i = 0; $i < count($combine_un_assoc); $i++) {
 
 		
-		$data = $combine_un_assoc[0]["booking_start"];
-		$comparable = vsprintf("(%d)-%d-%d",sscanf($data, "%5d%3d%5d"));
+		$data = (string)$combine_un_assoc[$i]["booking_start"];
+		$date_snipped = substr($data,0,8);
 		echo "<br>";	
 		echo "<br>";	
 		echo 618;	
 		
 		echo "<br>";	
+		echo $date_snipped . " Is Compared to " . $date_entered;  
+		echo "<br>";	
+
+
 
 		if ($date_entered != $comparable ){
 
