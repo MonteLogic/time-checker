@@ -465,7 +465,7 @@ public static function arrays_to_combine($a1,$a2){
 
 
 public static function date_enter_filter($date_entered, $combine_un_assoc){
-    echo 617;
+    // echo 617;
 
 	$filtered_date = array();
 
@@ -484,13 +484,13 @@ public static function date_enter_filter($date_entered, $combine_un_assoc){
 		
 		$data = (string)$combine_un_assoc[$i]["booking_start"];
 		$date_snipped = substr($data,0,8);
-		echo "<br>";	
-		echo "<br>";	
-		echo 618;	
+		//echo "<br>";	
+		//echo "<br>";	
+		// echo 618;	
 		
-		echo "<br>";	
-		echo $date_snipped . " Is Compared to " . $date_entered;  
-		echo "<br>";	
+		// echo "<br>";	
+		//echo $date_snipped . " Is Compared to " . $date_entered;  
+		// echo "<br>";	
 
 
 
@@ -520,10 +520,10 @@ public static function time_enter_filter($filtered_date, $begin_hours, $end_hour
 
 		$begin_hours_compare = date("hi", strtotime($begin_hours));
 		$end_hours_compare = date("hi", strtotime($end_hours));
-		echo $begin_hours_compare; 
+		// echo $begin_hours_compare; 
 		echo "<br>";	
-		echo 624;	
-		echo "<br>";	
+		// echo 624;	
+		// echo "<br>";	
 		echo $end_hours_compare;
 
 
@@ -546,7 +546,29 @@ public static function time_enter_filter($filtered_date, $begin_hours, $end_hour
 		//}
 	}		
 	echo 630;
-	return $filtered_date;
+	return $filtered_time;
+}
+
+public static function output_times_dates($filtered_date, $filtered_time){
+
+
+	echo 632;
+
+	if( !$filtered_date || !$filtered_time){
+		echo "<h1>There is no bookings for the selected range.</h1>";
+	}
+	if( $filtered_date ){
+		echo "<p> Filtered Date = </p>";
+		var_dump($filtered_date);
+	}
+	if( $filtered_time ){
+		echo "<p> Filtered Time = </p>";
+		var_dump($filtered_time);
+	}
+
+
+
+
 }
 
 

@@ -125,31 +125,31 @@ isset($_POST["date"]) && isset($_POST["course_name"])
 
 ){ 
 
-  echo "401";
-  echo "<br>";
-  echo "begin time = ";
-  echo $_POST["begin_hours"];
-  $begin_hours = $_POST["begin_hours"];
-  echo "<br>";
-  echo 402;
-  echo "<br>";
-  echo "end time = ";
-  echo $_POST["end_hours"];
-  $end_hours = $_POST["end_hours"];
+  //echo "401";
+  //echo "<br>";
+  //echo "begin time = ";
+  //echo $_POST["begin_hours"];
+  //$begin_hours = $_POST["begin_hours"];
+  //echo "<br>";
+  //echo 402;
+  // echo "<br>";
+  // echo "end time = ";
+  // echo $_POST["end_hours"];
+  // $end_hours = $_POST["end_hours"];
 
-  echo "<br>";
+  // echo "<br>";
 
 
-  echo 403;
-  echo "<br>";
+  // echo 403;
+  // echo "<br>";
   $array_unique_time_unit = $_POST['date'];
   $month = substr($array_unique_time_unit,0,2);
   $day = substr($array_unique_time_unit,3,2);
   $year = substr($array_unique_time_unit,6);
-  echo "Date chosen = ";
+  // echo "Date chosen = ";
   //$date_entered = $month.$day.$year;
   $date_entered = $year.$month.$day; 
-  echo $date_entered;
+  // echo $date_entered;
   // I might have already done what 
   // I want as far as the date output.
   $day_start    = strtotime( 'midnight', strtotime( $day ) );
@@ -207,14 +207,12 @@ $combined_array = SQL_Post_Request::arrays_to_combine($a1,$a2);
 
 
 $combine_un_assoc = array_values($combined_array);
-var_dump($combine_un_assoc);
-
-// Create table from combine_un_assoc after 
-// a time filter is implemented.
 
 $filtered_date = SQL_Post_Request::date_enter_filter($date_entered, $combine_un_assoc);
 
-SQL_Post_Request::time_enter_filter($filtered_date, $begin_hours, $end_hours);
+$filtered_time =  SQL_Post_Request::time_enter_filter($filtered_date, $begin_hours, $end_hours);
+
+SQL_Post_Request::output_times_dates($filtered_date, $filtered_time);
 
 
 }
