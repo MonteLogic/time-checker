@@ -501,12 +501,53 @@ public static function date_enter_filter($date_entered, $combine_un_assoc){
 		}
 	}		
 	echo 622;
-	var_dump($filtered_date);
+	return $filtered_date;
 }
 
+// time_enter_filter and date_enter_filter should be combined.
 
 
 
+
+public static function time_enter_filter($filtered_date, $begin_hours, $end_hours){
+    echo 623;
+
+	$filtered_time = array();
+
+    echo PHP_EOL;
+    echo PHP_EOL;
+	for($i = 0; $i < count($filtered_date); $i++) {
+
+		$begin_hours_compare = date("hi", strtotime($begin_hours));
+		$end_hours_compare = date("hi", strtotime($end_hours));
+		echo $begin_hours_compare; 
+		echo "<br>";	
+		echo 624;	
+		echo "<br>";	
+		echo $end_hours_compare;
+
+
+		$data = (string)$combine_un_assoc[$i]["booking_start"];
+		echo "<br>";	
+		echo "<br>";	
+		echo 628;	
+		
+		echo "<br>";	
+		echo "<br>";	
+
+
+	// Need to print time.
+
+		//if ($date_snipped == $date_entered ){	
+		//	$filtered_time[] = $combine_un_assoc[$i];
+		//	echo 622;
+
+
+		//}
+	}		
+	echo 630;
+	return $filtered_date;
+}
 
 
 
