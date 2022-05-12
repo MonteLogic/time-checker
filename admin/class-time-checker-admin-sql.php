@@ -554,7 +554,7 @@ public static function output_times_dates($filtered_date, $filtered_time){
 
 	echo 632;
 
-	if( !$filtered_date || !$filtered_time){
+	if( !$filtered_date && !$filtered_time){
 		echo "<h1>There is no bookings for the selected range.</h1>";
 	}
 	if( $filtered_date ){
