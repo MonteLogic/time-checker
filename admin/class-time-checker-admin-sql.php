@@ -535,6 +535,7 @@ public static function time_enter_filter($filtered_date, $begin_hours, $end_hour
 		$begin_hours_compare = date("hi", strtotime($begin_hours));
 		$end_hours_compare = date("hi", strtotime($end_hours));
 		echo $begin_hours_compare; 
+		echo "<br>";	
 		echo $end_hours_compare;
 		echo "<br>";	
 		echo "<br>";	
@@ -544,10 +545,13 @@ public static function time_enter_filter($filtered_date, $begin_hours, $end_hour
 
 		$booking_start = (string)$filtered_date[$i]["booking_start"];
 		$booking_end = (string)$filtered_date[$i]["booking_end"];
-		$start_snipped = substr($booking_start,2, 8);
-		$end_snipped = substr($booking_end,8);
-		echo $booking_start;
+		echo "<br>";	
+		$start_snipped = substr($booking_start,8, 4);
+		echo "<br>";	
+		$end_snipped = substr($booking_end,8, 4);
+		echo "<br>";	
 		echo $start_snipped;
+		echo "<br>";	
 		echo "  ";
 		echo $end_snipped;
 		echo "<br>";	
