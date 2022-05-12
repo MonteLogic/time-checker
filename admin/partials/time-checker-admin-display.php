@@ -129,13 +129,13 @@ isset($_POST["date"]) && isset($_POST["course_name"])
   //echo "<br>";
   //echo "begin time = ";
   //echo $_POST["begin_hours"];
-  //$begin_hours = $_POST["begin_hours"];
+  $begin_hours = $_POST["begin_hours"];
   //echo "<br>";
   //echo 402;
   // echo "<br>";
   // echo "end time = ";
   // echo $_POST["end_hours"];
-  // $end_hours = $_POST["end_hours"];
+  $end_hours = $_POST["end_hours"];
 
   // echo "<br>";
 
@@ -211,6 +211,9 @@ $combine_un_assoc = array_values($combined_array);
 $filtered_date = SQL_Post_Request::date_enter_filter($date_entered, $combine_un_assoc);
 
 $filtered_time =  SQL_Post_Request::time_enter_filter($filtered_date, $begin_hours, $end_hours);
+
+var_dump($filtered_time);
+
 
 SQL_Post_Request::output_times_dates($filtered_date, $filtered_time);
 

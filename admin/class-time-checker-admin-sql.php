@@ -509,6 +509,19 @@ public static function date_enter_filter($date_entered, $combine_un_assoc){
 
 
 
+/**
+ * time_enter_filter - What is the purpose of this function?
+ * 						To take the times entered by the client and
+ * 						check them with the bookings and remove the ones
+ * 						that are not in the valid time range.
+ * 
+ * @param mixed $filtered_date 
+ * @param mixed $begin_hours 
+ * @param mixed $end_hours 
+ * @static
+ * @access public
+ * @return void
+ */
 public static function time_enter_filter($filtered_date, $begin_hours, $end_hours){
     echo 623;
 
@@ -518,16 +531,27 @@ public static function time_enter_filter($filtered_date, $begin_hours, $end_hour
     echo PHP_EOL;
 	for($i = 0; $i < count($filtered_date); $i++) {
 
+		echo "<br>";	
 		$begin_hours_compare = date("hi", strtotime($begin_hours));
 		$end_hours_compare = date("hi", strtotime($end_hours));
-		// echo $begin_hours_compare; 
-		echo "<br>";	
-		// echo 624;	
-		// echo "<br>";	
+		echo $begin_hours_compare; 
 		echo $end_hours_compare;
+		echo "<br>";	
+		echo "<br>";	
+		echo 624;	
+		// echo "<br>";	
 
 
-		$data = (string)$combine_un_assoc[$i]["booking_start"];
+		$booking_start = (string)$filtered_date[$i]["booking_start"];
+		$booking_end = (string)$filtered_date[$i]["booking_end"];
+		$start_snipped = substr($booking_start,2, 8);
+		$end_snipped = substr($booking_end,8);
+		echo $booking_start;
+		echo $start_snipped;
+		echo "  ";
+		echo $end_snipped;
+		echo "<br>";	
+		echo 625;	
 		echo "<br>";	
 		echo "<br>";	
 		echo 628;	
