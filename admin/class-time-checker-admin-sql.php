@@ -531,12 +531,16 @@ public static function time_enter_filter($filtered_date, $begin_hours, $end_hour
     echo PHP_EOL;
 	for($i = 0; $i < count($filtered_date); $i++) {
 
+		echo "<br>";
+		echo "<br>";
+		echo 623.4;	
+		$entered_start_hours = date("Hi", strtotime($begin_hours));
+		$entered_end_hours = date("Hi", strtotime($end_hours));
+		echo "Entered start = ";	
+		echo $entered_start_hours;	
 		echo "<br>";	
-		$begin_hours_compare = date("hi", strtotime($begin_hours));
-		$end_hours_compare = date("hi", strtotime($end_hours));
-		echo $begin_hours_compare; 
-		echo "<br>";	
-		echo $end_hours_compare;
+		echo "Entered end = ";	
+		echo $entered_end_hours;
 		echo "<br>";	
 		echo "<br>";	
 		echo 624;	
@@ -550,9 +554,11 @@ public static function time_enter_filter($filtered_date, $begin_hours, $end_hour
 		echo "<br>";	
 		$end_snipped = substr($booking_end,8, 4);
 		echo "<br>";	
+		echo "Start snipped = ";	
 		echo $start_snipped;
 		echo "<br>";	
 		echo "  ";
+		echo "End snipped = ";	
 		echo $end_snipped;
 		echo "<br>";	
 		echo 625;	
@@ -564,14 +570,15 @@ public static function time_enter_filter($filtered_date, $begin_hours, $end_hour
 		echo "<br>";	
 
 
-	// Need to print time.
+		// Need to print time.
+		if (($start_snipped == $entered_start_hours) && ($end_snipped == $entered_end_hours)){	
+			$filtered_time[] = $filtered_date[$i];
+			echo "<br>";	
+			echo "<br>";	
+			echo 622;
 
-		//if ($date_snipped == $date_entered ){	
-		//	$filtered_time[] = $combine_un_assoc[$i];
-		//	echo 622;
 
-
-		//}
+		}
 	}		
 	echo 630;
 	return $filtered_time;
