@@ -377,8 +377,6 @@ public static function pair_parent_with_child($array_wp_postmeta_child, $parent_
 		else{	
 	        	 $wc_purchase_ids[] =  $wc_pairings =array( "wc" =>  $parent_post_array_return[$i]["post_parent"], "wcb" => $array_wp_postmeta_child[$i] );
 	
-			//$valid_wc_and_wcb_id = ($array_wp_postmeta_child[$i] => "Some value.");
-			//echo $array_wp_postmeta_child[$i] . "-wcb & " . $parent_post_array_return[$i]["post_parent"]. "-wc,  he or she bought " , $product_id . " and paid with " . "<br><br>";
 		}
 	}
 	return $wc_purchase_ids;
@@ -392,11 +390,6 @@ public static function pair_parent_with_child($array_wp_postmeta_child, $parent_
 public static function arrays_to_combine($a1,$a2){
 	$combined_array = array();
 	$j =0;
-	//echo "512";
-	//echo PHP_EOL;
-	//echo count($a2);
-	//echo PHP_EOL;
-	//echo count($a1);
 	$counter = 0;
 	if ( count($a1) > count($a2)  ){
 		$counter = count($a1);
@@ -431,8 +424,12 @@ public static function arrays_to_combine($a1,$a2){
 				$a2_un_assoc[$j]["post_id"],
 				"booking_start" =>	
 					$a2_un_assoc[$j]["meta_value"],
-
-
+				"first_name" =>
+					wc_get_order( $a1[$i]["wc"] )->get_billing_first_name(),	
+				"last_name" =>
+					wc_get_order( $a1[$i]["wc"] )->get_billing_last_name(),	
+				"has_customer_paid" =>
+					447,	
 				// Starting +1 side
 				"booking_end" =>	
 					$a2_un_assoc[$j+1]["meta_value"],
@@ -457,7 +454,6 @@ public static function arrays_to_combine($a1,$a2){
 		 	
 		 }
 	}
-	echo PHP_EOL;
 	}
 }
 
@@ -477,30 +473,16 @@ public static function date_enter_filter($date_entered, $combine_un_assoc){
         echo "Date provided = " . $date_entered;
 
     }
-    echo PHP_EOL;
-    echo PHP_EOL;
 	for($i = 0; $i < count($combine_un_assoc); $i++) {
 
 		
 		$data = (string)$combine_un_assoc[$i]["booking_start"];
 		$date_snipped = substr($data,0,8);
-		//echo "<br>";	
-		//echo "<br>";	
-		// echo 618;	
-		
-		// echo "<br>";	
-		//echo $date_snipped . " Is Compared to " . $date_entered;  
-		// echo "<br>";	
-
-
 
 		if ($date_snipped == $date_entered ){	
 			$filtered_date[] = $combine_un_assoc[$i];
-			echo 619;
-
 		}
 	}		
-	echo 622;
 	return $filtered_date;
 }
 
@@ -523,7 +505,6 @@ public static function date_enter_filter($date_entered, $combine_un_assoc){
  * @return void
  */
 public static function time_enter_filter($filtered_date, $begin_hours, $end_hours){
-    echo 623;
 
 	$filtered_time = array();
 
@@ -531,45 +512,12 @@ public static function time_enter_filter($filtered_date, $begin_hours, $end_hour
     echo PHP_EOL;
 	for($i = 0; $i < count($filtered_date); $i++) {
 
-		echo "<br>";
-		echo "<br>";
-		echo 623.4;	
 		$entered_start_hours = date("Hi", strtotime($begin_hours));
 		$entered_end_hours = date("Hi", strtotime($end_hours));
-		echo "Entered start = ";	
-		echo $entered_start_hours;	
-		echo "<br>";	
-		echo "Entered end = ";	
-		echo $entered_end_hours;
-		echo "<br>";	
-		echo "<br>";	
-		echo 624;	
-		// echo "<br>";	
-
-
 		$booking_start = (string)$filtered_date[$i]["booking_start"];
 		$booking_end = (string)$filtered_date[$i]["booking_end"];
-		echo "<br>";	
 		$start_snipped = substr($booking_start,8, 4);
-		echo "<br>";	
 		$end_snipped = substr($booking_end,8, 4);
-		echo "<br>";	
-		echo "Start snipped = ";	
-		echo $start_snipped;
-		echo "<br>";	
-		echo "  ";
-		echo "End snipped = ";	
-		echo $end_snipped;
-		echo "<br>";	
-		echo 625;	
-		echo "<br>";	
-		echo "<br>";	
-		echo 628;	
-		
-		echo "<br>";	
-		echo "<br>";	
-
-
 		// Need to print time.
 		if (($start_snipped == $entered_start_hours) && ($end_snipped == $entered_end_hours)){	
 			$filtered_time[] = $filtered_date[$i];
@@ -580,21 +528,18 @@ public static function time_enter_filter($filtered_date, $begin_hours, $end_hour
 
 		}
 	}		
-	echo 630;
 	return $filtered_time;
 }
 
 public static function output_times_dates($filtered_date, $filtered_time){
 
 
-	echo 632;
 
 	if( !$filtered_date && !$filtered_time){
 		echo "<h1>There is no bookings for the selected range.</h1>";
 	}
 	if( $filtered_date ){
 		echo "<p> Filtered Date = </p>";
-		var_dump($filtered_date);
 	}
 	if( $filtered_time ){
 		echo "<p> Filtered Time = </p>";

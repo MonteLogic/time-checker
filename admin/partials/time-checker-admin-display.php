@@ -216,6 +216,19 @@ var_dump($filtered_time);
 
 
 SQL_Post_Request::output_times_dates($filtered_date, $filtered_time);
+$order_id = 8885; 
+
+echo 777;
+echo "<br>";
+echo wc_get_order( $order_id )->get_billing_first_name();
+
+
+
+echo 777;
+echo 778;
+
+
+
 
 
 }
