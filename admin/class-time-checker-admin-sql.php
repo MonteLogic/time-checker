@@ -55,6 +55,8 @@ public static function fill_all_booking_times($arrayParam){
 
 
 
+
+
 /**
  * turn_into_units - This function takes the large string that includes 
  * 		     the days in the months and puts it into units that can be used better.
@@ -129,6 +131,22 @@ public static function get_sql_vars_two() {
 
 class SQL_Post_Request {
 
+	
+public static function format_entered_date($begin_hours, $end_hours, $int_date_entered){
+
+$begin_hours = $_POST["begin_hours"];
+$end_hours = $_POST["end_hours"];
+$array_unique_time_unit = $_POST['date'];
+$month = substr($array_unique_time_unit,0,2);
+$day = substr($array_unique_time_unit,3,2);
+$year = substr($array_unique_time_unit,6);
+$date_entered = $year.$month.$day; 
+$day_start    = strtotime( 'midnight', strtotime( $day ) );
+$day_end      = strtotime( 'midnight +1 day', strtotime( $day ) ) - 1;
+return $date_entered;
+
+
+}
 /**
  * fill_a1_simple_array - 
  * 
@@ -463,21 +481,11 @@ public static function arrays_to_combine($a1,$a2){
 }
 
 
-
-
 public static function date_enter_filter($date_entered, $combine_un_assoc){
     // echo 617;
 
 	$filtered_date = array();
 
-    if(!$date_entered){
-        echo "No date provided";
-
-    }
-    if($date_entered){
-        echo "Date provided = " . $date_entered;
-
-    }
 	for($i = 0; $i < count($combine_un_assoc); $i++) {
 
 		
@@ -512,11 +520,7 @@ public static function date_enter_filter($date_entered, $combine_un_assoc){
 public static function time_enter_filter($filtered_date, $begin_hours, $end_hours){
 
 	$filtered_time = array();
-
-    echo PHP_EOL;
-    echo PHP_EOL;
 	for($i = 0; $i < count($filtered_date); $i++) {
-
 		$entered_start_hours = date("Hi", strtotime($begin_hours));
 		$entered_end_hours = date("Hi", strtotime($end_hours));
 		$booking_start = (string)$filtered_date[$i]["booking_start"];
@@ -526,14 +530,24 @@ public static function time_enter_filter($filtered_date, $begin_hours, $end_hour
 		// Need to print time.
 		if (($start_snipped == $entered_start_hours) && ($end_snipped == $entered_end_hours)){	
 			$filtered_time[] = $filtered_date[$i];
-			echo "<br>";	
-			echo "<br>";	
-			echo 622;
-
-
 		}
 	}		
 	return $filtered_time;
+}
+
+public static function search_form_output($date_entered, $combine_un_assoc){
+
+
+	if(!$date_entered){
+        echo "<br>";
+        echo "<h1>No date provided</h1>";
+        echo "<br>";
+    }
+    if($date_entered){
+        echo "<br>";
+        echo "<h1> Date provided = " . $date_entered . " </h1>";
+        echo "<br>";
+    }
 }
 
 public static function output_times_dates($filtered_date, $filtered_time){
