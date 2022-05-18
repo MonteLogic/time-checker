@@ -428,8 +428,13 @@ public static function arrays_to_combine($a1,$a2){
 					wc_get_order( $a1[$i]["wc"] )->get_billing_first_name(),	
 				"last_name" =>
 					wc_get_order( $a1[$i]["wc"] )->get_billing_last_name(),	
-				"has_customer_paid" =>
-					447,	
+				"payment_method" =>
+					wc_get_order( $a1[$i]["wc"] )->get_payment_method(),	
+				"wc_order_status" =>
+					wc_get_order( $a1[$i]["wc"] )->get_status(),	
+				"wcb_booking_status" =>
+					444,
+					//wc_get_order( $a1[$i]["wcb"] )->get_status(),	
 				// Starting +1 side
 				"booking_end" =>	
 					$a2_un_assoc[$j+1]["meta_value"],

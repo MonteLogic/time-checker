@@ -215,6 +215,18 @@ $filtered_time =  SQL_Post_Request::time_enter_filter($filtered_date, $begin_hou
 var_dump($filtered_time);
 
 
+$booking_obj = new WC_Booking( 8884);
+
+
+echo "<br>";
+
+echo 776;
+echo $booking_obj->get_status();
+
+echo "<br>";
+
+
+
 SQL_Post_Request::output_times_dates($filtered_date, $filtered_time);
 $order_id = 8885; 
 
