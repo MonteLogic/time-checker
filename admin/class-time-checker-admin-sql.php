@@ -419,25 +419,25 @@ public static function arrays_to_combine($a1,$a2){
 				$a1[$i]["wcb"])
 				){
 
+				$booking_status = new WC_Booking($a1[$i]["wcb"]);
 				$combined_array[$j] = array(	
 				"wcb_id" =>	
 				$a2_un_assoc[$j]["post_id"],
 				"booking_start" =>	
 					$a2_un_assoc[$j]["meta_value"],
+				"booking_end" =>	
+					$a2_un_assoc[$j+1]["meta_value"],
 				"first_name" =>
 					wc_get_order( $a1[$i]["wc"] )->get_billing_first_name(),	
 				"last_name" =>
 					wc_get_order( $a1[$i]["wc"] )->get_billing_last_name(),	
 				"payment_method" =>
 					wc_get_order( $a1[$i]["wc"] )->get_payment_method(),	
-				"wc_order_status" =>
-					wc_get_order( $a1[$i]["wc"] )->get_status(),	
+				"payment_method_title" =>
+					wc_get_order( $a1[$i]["wc"] )->get_payment_method_title(),	
 				"wcb_booking_status" =>
-					444,
-					//wc_get_order( $a1[$i]["wcb"] )->get_status(),	
+					$booking_status->get_status(),
 				// Starting +1 side
-				"booking_end" =>	
-					$a2_un_assoc[$j+1]["meta_value"],
 				"wc_id" => 	
 					$a1[$i]["wc"]
 				

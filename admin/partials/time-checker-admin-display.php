@@ -212,7 +212,6 @@ $filtered_date = SQL_Post_Request::date_enter_filter($date_entered, $combine_un_
 
 $filtered_time =  SQL_Post_Request::time_enter_filter($filtered_date, $begin_hours, $end_hours);
 
-var_dump($filtered_time);
 
 
 $booking_obj = new WC_Booking( 8884);
