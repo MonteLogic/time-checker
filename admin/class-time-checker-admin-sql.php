@@ -131,21 +131,29 @@ public static function get_sql_vars_two() {
 
 class SQL_Post_Request {
 
+public static function formatted_date($begin_hours, $end_hours, $int_date_entered){
+  $begin_hours = $_POST["begin_hours"];
+  $end_hours = $_POST["end_hours"];
+  $array_unique_time_unit = $_POST['date'];
+  $month = substr($array_unique_time_unit,0,2);
+  $day = substr($array_unique_time_unit,3,2);
+  $year = substr($array_unique_time_unit,6);
+  $formatted_date = $year.$month.$day; 
+  $formatted_date = $month . "/". $day . "/". $year;
+return $formatted_date;
+}
 	
 public static function format_entered_date($begin_hours, $end_hours, $int_date_entered){
-
-$begin_hours = $_POST["begin_hours"];
-$end_hours = $_POST["end_hours"];
-$array_unique_time_unit = $_POST['date'];
-$month = substr($array_unique_time_unit,0,2);
-$day = substr($array_unique_time_unit,3,2);
-$year = substr($array_unique_time_unit,6);
-$date_entered = $year.$month.$day; 
-$day_start    = strtotime( 'midnight', strtotime( $day ) );
-$day_end      = strtotime( 'midnight +1 day', strtotime( $day ) ) - 1;
+  $begin_hours = $_POST["begin_hours"];
+  $end_hours = $_POST["end_hours"];
+  $array_unique_time_unit = $_POST['date'];
+  $month = substr($array_unique_time_unit,0,2);
+  $day = substr($array_unique_time_unit,3,2);
+  $year = substr($array_unique_time_unit,6);
+  $date_entered = $year.$month.$day; 
+  $day_start    = strtotime( 'midnight', strtotime( $day ) );
+  $day_end      = strtotime( 'midnight +1 day', strtotime( $day ) ) - 1;
 return $date_entered;
-
-
 }
 /**
  * fill_a1_simple_array - 
@@ -535,7 +543,7 @@ public static function time_enter_filter($filtered_date, $begin_hours, $end_hour
 	return $filtered_time;
 }
 
-public static function search_form_output($date_entered, $combine_un_assoc){
+public static function search_form_output($date_entered, $formatted_date, $combine_un_assoc){
 
 
 	if(!$date_entered){
@@ -545,30 +553,40 @@ public static function search_form_output($date_entered, $combine_un_assoc){
     }
     if($date_entered){
         echo "<br>";
-        echo "<h1> Date provided = " . $date_entered . " </h1>";
+        echo "<h1> Date submitted = " . $formatted_date . " </h1>";
         echo "<br>";
     }
 }
 
 public static function output_times_dates($filtered_date, $filtered_time){
-
-
-
 	if( !$filtered_date && !$filtered_time){
 		echo "<h1>There is no bookings for the selected range.</h1>";
 	}
 	if( $filtered_date ){
-		echo "<p> Filtered Date = </p>";
+		echo "<p> A date was provided </p>";
 	}
 	if( $filtered_time ){
-		echo "<p> Filtered Time = </p>";
+		echo "<p> Pertinent booking entries </p>";
 		var_dump($filtered_time);
 	}
-
+}
 
 
 
 }
+
+
+class Edit_Bookings {
+	// This class will be used to edit the entries. They need to be editable so that work may be 
+	// in the Sql_Post_Request class
+
+
+
+
+
+
+
+
 
 
 

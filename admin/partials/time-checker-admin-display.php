@@ -171,31 +171,22 @@ $filtered_date = SQL_Post_Request::date_enter_filter($date_entered, $combine_un_
 
 $filtered_time =  SQL_Post_Request::time_enter_filter($filtered_date, $begin_hours, $end_hours);
 
-SQL_Post_Request::search_form_output($date_entered, $combine_un_assoc);
+$formatted_date = SQL_Post_Request::formatted_date($filtered_date, $begin_hours, $end_hours);
+
+
+
+SQL_Post_Request::search_form_output($date_entered, $formatted_date, $combine_un_assoc);
 
 $booking_obj = new WC_Booking( 8884);
 
 
 echo "<br>";
-
-echo 776;
-echo $booking_obj->get_status();
-
 echo "<br>";
 
 
 
 SQL_Post_Request::output_times_dates($filtered_date, $filtered_time);
-$order_id = 8885; 
 
-echo 777;
-echo "<br>";
-echo wc_get_order( $order_id )->get_billing_first_name();
-
-
-
-echo 777;
-echo 778;
 
 
 
