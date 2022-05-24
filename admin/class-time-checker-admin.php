@@ -109,6 +109,7 @@ public function my_admin_menu() {
 		public function tc_settings_home(){
 
 		require_once 'partials/time-checker-admin-display.php';
+		require_once 'partials/time-checker-post-search.php';
 
 	}
 
