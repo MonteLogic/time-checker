@@ -410,7 +410,27 @@ public static function pair_parent_with_child($array_wp_postmeta_child, $parent_
 
 
 
+public static function get_private_order_notes( $order_id){
+    global $wpdb;
 
+    $table_perfixed = $wpdb->prefix . 'comments';
+    $results = $wpdb->get_results("
+        SELECT *
+        FROM $table_perfixed
+        WHERE  `comment_post_ID` = $order_id
+        AND  `comment_type` LIKE  'order_note'
+    ");
+
+    foreach($results as $note){
+        $order_note[]  = array(
+            'note_id'      => $note->comment_ID,
+            'note_date'    => $note->comment_date,
+            'note_author'  => $note->comment_author,
+            'note_content' => $note->comment_content,
+        );
+    }
+    return $order_note;
+}
 
 
 public static function arrays_to_combine($a1,$a2){
@@ -436,7 +456,6 @@ public static function arrays_to_combine($a1,$a2){
 			//echo " j = $j ";
 			//echo $a2_un_assoc[$j]["post_id"];
 
-
 			if (($a1[$i]["wcb"] == 
 				$a2_un_assoc[$j]["post_id"])
 				&&
@@ -444,6 +463,20 @@ public static function arrays_to_combine($a1,$a2){
 				== 
 				$a1[$i]["wcb"])
 				){
+				// WC_Order object.
+				echo "<br>";
+				echo "<br>";
+
+				var_dump( self::get_private_order_notes($a1[$i]["wc"]));
+				echo 556;
+				echo "<br>";
+				echo "<br>";
+				echo $a1[$i]["wc"];
+
+				$order = new WC_Order($a1[$i]["wc"] );
+				echo 559;
+				echo "<br>";
+				var_dump($order->get_customer_note());
 
 				$booking_status = new WC_Booking($a1[$i]["wcb"]);
 				$combined_array[$j] = array(	
@@ -463,10 +496,18 @@ public static function arrays_to_combine($a1,$a2){
 					wc_get_order( $a1[$i]["wc"] )->get_payment_method_title(),	
 				"wcb_booking_status" =>
 					$booking_status->get_status(),
-				// Starting +1 side
 				"wc_id" => 	
-					$a1[$i]["wc"]
-				
+					$a1[$i]["wc"],
+				"order_note" => 	
+				66
+					//$WC_Order->get_customer_order_notes()
+
+
+
+
+	
+
+
 				);	
 			}
 		}

@@ -187,7 +187,6 @@ echo "<br>";
 
 
 
-SQL_Post_Request::output_times_dates($filtered_date, $filtered_time);
 
 
 
@@ -210,9 +209,16 @@ if (count($filtered_time) > 0): ?>
 <?php endif; 
 
 
+echo "<br>";
+echo "<br>";
+echo "<br>";
+echo "<br>";
+echo "<br>";
 
 
 
+
+SQL_Post_Request::output_times_dates($filtered_date, $filtered_time);
 
 
 
