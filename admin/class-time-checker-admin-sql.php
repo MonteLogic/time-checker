@@ -410,6 +410,14 @@ public static function pair_parent_with_child($array_wp_postmeta_child, $parent_
 
 
 
+/**
+ * get_private_order_notes - Get notes, this function is VERY useful. 
+ * 
+ * @param mixed $order_id 
+ * @static
+ * @access public
+ * @return void
+ */
 public static function get_private_order_notes( $order_id){
     global $wpdb;
 
@@ -452,9 +460,6 @@ public static function arrays_to_combine($a1,$a2){
 			&&
 			isset($a2_un_assoc[$j+1]["post_id"]))	
 			{
-			//echo " i = $i ";
-			//echo " j = $j ";
-			//echo $a2_un_assoc[$j]["post_id"];
 
 			if (($a1[$i]["wcb"] == 
 				$a2_un_assoc[$j]["post_id"])
@@ -473,6 +478,11 @@ public static function arrays_to_combine($a1,$a2){
 				echo "<br>";
 				echo $a1[$i]["wc"];
 
+				echo "<br>";
+				echo "<br>";
+				self::determine_paid( $a1[$i]["wc"]);
+				echo "<br>";
+				echo "<br>";
 				$order = new WC_Order($a1[$i]["wc"] );
 				echo 559;
 				echo "<br>";
@@ -499,14 +509,10 @@ public static function arrays_to_combine($a1,$a2){
 				"wc_id" => 	
 					$a1[$i]["wc"],
 				"order_note" => 	
-				66
+				66,
+				"has_paid" => 	
+				self::determine_paid($a1[$i]["wc"]) 
 					//$WC_Order->get_customer_order_notes()
-
-
-
-
-	
-
 
 				);	
 			}
@@ -611,6 +617,70 @@ public static function output_times_dates($filtered_date, $filtered_time){
 		var_dump($filtered_time);
 	}
 }
+
+public static function display_html_table($filtered_time){
+
+
+if (count($filtered_time) > 0): ?>
+<table>
+  <thead>
+    <tr>
+      <th><?php echo implode('</th><th>', array_keys(current($filtered_time))); ?></th>
+    </tr>
+  </thead>
+  <tbody>
+<?php foreach ($filtered_time as $row): array_map('htmlentities', $row); ?>
+    <tr>
+      <td><?php echo implode('</td><td>', $row); ?></td>
+    </tr>
+<?php endforeach; ?>
+  </tbody>
+</table>
+<?php endif; 
+
+}
+
+
+
+
+
+/**
+ * determine_paid - When I press View Note and there's an abillity to change it. 
+ * there should be logic here to check for it. If the user has updated it as paid.    
+ * 
+ * @param mixed $order_id 
+ * @static
+ * @access public
+ * @return void
+ */
+public static function determine_paid($order_id){
+
+	// They all start out as false.
+	$order = new WC_Order($order_id );
+	$payment_method = $order->get_payment_method();
+
+	if ($payment_method == "cod"){
+		echo "<br>";
+		echo 555;
+		echo "<br>";
+		echo "It has returned false";
+		return "false";
+	}
+
+	if ($payment_method == "woocommerce_payments"){
+		echo "<br>";
+		echo 556;
+		echo "<br>";
+		echo "It has returned true";
+		return "true";
+	}
+
+}
+
+
+
+
+
 
 
 

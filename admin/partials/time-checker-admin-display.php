@@ -184,29 +184,10 @@ echo "<br>";
 echo "<br>";
 
 
+echo 504;
 
+SQL_Post_Request::display_html_table($filtered_time);
 
-
-
-
-
-
-if (count($filtered_time) > 0): ?>
-<table>
-  <thead>
-    <tr>
-      <th><?php echo implode('</th><th>', array_keys(current($filtered_time))); ?></th>
-    </tr>
-  </thead>
-  <tbody>
-<?php foreach ($filtered_time as $row): array_map('htmlentities', $row); ?>
-    <tr>
-      <td><?php echo implode('</td><td>', $row); ?></td>
-    </tr>
-<?php endforeach; ?>
-  </tbody>
-</table>
-<?php endif; 
 
 
 echo "<br>";
