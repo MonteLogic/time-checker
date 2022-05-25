@@ -576,18 +576,7 @@ public static function output_times_dates($filtered_date, $filtered_time){
 }
 
 
-class Edit_Bookings {
-	// This class will be used to edit the entries. They need to be editable so that work may be 
-	// in the Sql_Post_Request class
 
 
 
 
-
-
-
-
-
-
-
-}

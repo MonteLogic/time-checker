@@ -187,6 +187,9 @@ echo "<br>";
 
 SQL_Post_Request::output_times_dates($filtered_date, $filtered_time);
 
+Edit_Post_Search::crudAdminPage();
+
+
 
 
 
