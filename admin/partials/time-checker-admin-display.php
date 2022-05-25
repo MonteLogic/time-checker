@@ -185,9 +185,30 @@ echo "<br>";
 
 
 
+
+
 SQL_Post_Request::output_times_dates($filtered_date, $filtered_time);
 
-Edit_Post_Search::crudAdminPage();
+
+
+
+if (count($filtered_time) > 0): ?>
+<table>
+  <thead>
+    <tr>
+      <th><?php echo implode('</th><th>', array_keys(current($filtered_time))); ?></th>
+    </tr>
+  </thead>
+  <tbody>
+<?php foreach ($filtered_time as $row): array_map('htmlentities', $row); ?>
+    <tr>
+      <td><?php echo implode('</td><td>', $row); ?></td>
+    </tr>
+<?php endforeach; ?>
+  </tbody>
+</table>
+<?php endif; 
+
 
 
 
