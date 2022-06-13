@@ -469,24 +469,8 @@ public static function arrays_to_combine($a1,$a2){
 				$a1[$i]["wcb"])
 				){
 				// WC_Order object.
-				echo "<br>";
-				echo "<br>";
-
-				var_dump( self::get_private_order_notes($a1[$i]["wc"]));
-				echo 556;
-				echo "<br>";
-				echo "<br>";
-				echo $a1[$i]["wc"];
-
-				echo "<br>";
-				echo "<br>";
 				self::determine_paid( $a1[$i]["wc"]);
-				echo "<br>";
-				echo "<br>";
 				$order = new WC_Order($a1[$i]["wc"] );
-				echo 559;
-				echo "<br>";
-				var_dump($order->get_customer_note());
 
 				$booking_status = new WC_Booking($a1[$i]["wcb"]);
 				$combined_array[$j] = array(	
@@ -508,8 +492,8 @@ public static function arrays_to_combine($a1,$a2){
 					$booking_status->get_status(),
 				"wc_id" => 	
 					$a1[$i]["wc"],
-				"order_note" => 	
-				66,
+				"order_notes" => 	
+				self::get_private_order_notes($a1[$i]["wc"]),
 				"has_paid" => 	
 				self::determine_paid($a1[$i]["wc"]) 
 					//$WC_Order->get_customer_order_notes()
@@ -614,28 +598,60 @@ public static function output_times_dates($filtered_date, $filtered_time){
 	}
 	if( $filtered_time ){
 		echo "<p> Pertinent booking entries </p>";
-		var_dump($filtered_time);
 	}
 }
 
 public static function display_html_table($filtered_time){
 
-
+		foreach ($filtered_time as $iterate => $row):
+			$wcb_id[] = $filtered_time[$iterate]['wcb_id'];
+	$booking_start[] = $filtered_time[$iterate]['booking_start']; 
+	$booking_end[] = $filtered_time[$iterate]['booking_end']; 
+	$first_name[] = $filtered_time[$iterate]['first_name']; 
+	$last_name[] = $filtered_time[$iterate]['last_name'];
+			$payment_method[] = $filtered_time[$iterate]['payment_method'];
+			$payment_method_title[] = $filtered_time[$iterate]['payment_method_title'];
+			$wcb_booking_status[] = $filtered_time[$iterate]['wcb_booking_status'];
+			$wc_id[] = $filtered_time[$iterate]['wc_id'];
+			$has_paid[] = $filtered_time[$iterate]['has_paid'];
+		endforeach;	
 if (count($filtered_time) > 0): ?>
 <table>
   <thead>
     <tr>
-      <th><?php echo implode('</th><th>', array_keys(current($filtered_time))); ?></th>
+		<?php
+		$titles = array_keys($filtered_time[0]);
+		foreach ($titles as $iterate => $row):
+			echo "<th>" .  htmlspecialchars( $titles[$iterate] ) . "</th>";
+		endforeach;	
+		?>
     </tr>
   </thead>
   <tbody>
-<?php foreach ($filtered_time as $row): array_map('htmlentities', $row); ?>
+<?php foreach ($filtered_time as $iterate => $row): ?>
     <tr>
-      <td><?php echo implode('</td><td>', $row); ?></td>
+	<?php 
+		echo  "<td>"  . htmlspecialchars( $wcb_id[$iterate]) . "</td>"; 
+		echo  "<td>"  . htmlspecialchars( $booking_start[$iterate]) . "</td>"; 
+		echo  "<td>"  . htmlspecialchars( $booking_end[$iterate]) . "</td>"; 
+		echo  "<td>"  . htmlspecialchars( $first_name[$iterate]) . "</td>"; 
+		echo  "<td>"  . htmlspecialchars( $last_name[$iterate]) . "</td>"; 
+		echo  "<td>"  . htmlspecialchars( $payment_method[$iterate]) . "</td>"; 
+		echo  "<td>"  . htmlspecialchars( $payment_method_title[$iterate]) . "</td>"; 
+		echo  "<td>"  . htmlspecialchars( $wcb_booking_status[$iterate]) . "</td>"; 
+		echo  "<td>"  . htmlspecialchars( $wc_id[$iterate]) . "</td>"; 
+		echo  "<td>"  . 
+						'<button class="modal-button" type="button" 
+						onClick="place_html( ' . $iterate . ' )">View Modal</button>'.
+						"</td>";
+		echo  "<td>"  . htmlspecialchars( $has_paid[$iterate]) . "</td>"; 
+	?></td>
     </tr>
-<?php endforeach; ?>
+<?php 
+endforeach; ?>
   </tbody>
 </table>
+
 <?php endif; 
 
 }
@@ -660,24 +676,27 @@ public static function determine_paid($order_id){
 	$payment_method = $order->get_payment_method();
 
 	if ($payment_method == "cod"){
-		echo "<br>";
-		echo 555;
-		echo "<br>";
-		echo "It has returned false";
 		return "false";
 	}
 
 	if ($payment_method == "woocommerce_payments"){
-		echo "<br>";
-		echo 556;
-		echo "<br>";
-		echo "It has returned true";
 		return "true";
 	}
 
 }
 
 
+function display_popup_window($order_id){
+
+
+
+
+
+
+
+
+
+}
 
 
 

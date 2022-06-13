@@ -113,6 +113,64 @@ $array_unique_time_ends_no_repeats = SQL_Init_Request::get_sql_vars_two()[1];
 </form>
 
 
+
+
+
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<br>
+<br>
+<br>
+<!-- Modal Template -->
+<div id="myModal1" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+<!-- <h2>Modal Template</h2> -->
+      <span class="close">×</span>
+      <h2 id="modal-number">Modal One</h2>
+    </div>
+	<div class="modal-body" id="id-modal-body" >
+		<table id="order-note-table">
+			<thead>
+				<tr>
+     				<th>note_id</th><th>note_date</th><th>note_author</th><th>note_content</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr id="dynamic-info-row">
+					<th>placeholder</th>
+					<th>placeholder</th>
+					<th>placeholder</th>
+					<th>placeholder</th>
+
+				</tr>
+			</tbody>
+		</table>
+
+      <p id="paragraph-id"></p>
+	</div>
+    <div class="modal-footer">
+      <h3>Modal Footer</h3>
+    </div>
+  </div>
+
+</div>
+<br>
+<br>
+<br>
+<br>
+<div id="example-id" href="example-href" class="example-class">
+</div>
+<br>
+<br>
+
+
+
+
+
 <?php
 
 if(
@@ -148,59 +206,106 @@ $a1 = SQL_Post_Request::pair_parent_with_child(SQL_Post_Request::reduce_sql_arra
 // Begin a2 creation.
 $a2 = 
 	SQL_Post_Request::find_ids($array_booking_product_id_sql_cmd)[0];
-//echo "508";
-
-//echo "509";
 
 $no_match_entries =
 array_diff(
 	 SQL_Post_Request::fill_a2_simple_array($a2),
        	 SQL_Post_Request::fill_a1_simple_array($a1));
 
-// $no_match_entries is appropriate
-
 $a2 =  SQL_Post_Request::prune_a2($no_match_entries, $a2);
-
-
 $combined_array = SQL_Post_Request::arrays_to_combine($a1,$a2);
-
-
 $combine_un_assoc = array_values($combined_array);
-
 $filtered_date = SQL_Post_Request::date_enter_filter($date_entered, $combine_un_assoc);
-
 $filtered_time =  SQL_Post_Request::time_enter_filter($filtered_date, $begin_hours, $end_hours);
-
 $formatted_date = SQL_Post_Request::formatted_date($filtered_date, $begin_hours, $end_hours);
-
-
 
 SQL_Post_Request::search_form_output($date_entered, $formatted_date, $combine_un_assoc);
 
-$booking_obj = new WC_Booking( 8884);
-
-
-echo "<br>";
-echo "<br>";
-
-
-echo 504;
 
 SQL_Post_Request::display_html_table($filtered_time);
-
-
-
-echo "<br>";
-echo "<br>";
-echo "<br>";
-echo "<br>";
-echo "<br>";
-
-
-
-
 SQL_Post_Request::output_times_dates($filtered_date, $filtered_time);
 
 
-
 }
+
+
+
+
+?>
+
+
+
+
+<script>
+
+// Access the array elements
+var published_php_array = 
+    <?php echo json_encode($filtered_time); ?>;
+
+var published_array = Object.values(published_php_array);
+
+// Get the button that opens the modal
+var btn = document.querySelectorAll("button.modal-button");
+
+// All page modals
+var modals = document.querySelectorAll('.modal');
+
+// Get the <span> element that closes the modal
+var spans = document.getElementsByClassName("close");
+
+
+// When the user clicks on <span> (x), close the modal
+for (var i = 0; i < spans.length; i++) {
+ spans[i].onclick = function() {
+    for (var index in modals) {
+      if (typeof modals[index].style !== 'undefined') modals[index].style.display = "none";    
+    }
+ }
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target.classList.contains('modal')) {
+     for (var index in modals) {
+      if (typeof modals[index].style !== 'undefined') modals[index].style.display = "none";    
+     }
+    }
+}
+
+function place_html(ticker_value){
+	console.log(ticker_value);
+	var para = document.getElementById('paragraph-id');
+	var div = document.createElement("table"); 
+	document.getElementById("id-modal-body").appendChild(div);
+	console.log("place_html() ticker = " + ticker_value);
+	published_array_values = Object.values(published_array[ticker_value]);
+	published_array_length = published_array.length;
+	console.log(published_array_length); 
+	// para.innerHTML = "This is a paragraph";
+  var modal_number_id = document.getElementById("modal-number");
+  modal_number_id.innerHTML = "Modal " + ticker_value; 
+  order_note_body();
+  modal = document.getElementById("myModal1");
+  modal.style.display = "block";
+}
+
+function order_note_body(){
+	order_notes_values = Object.values(published_array_values[9]);
+	row = document.getElementById("dynamic-info-row");
+	console.log(1060);	
+	console.log(this.published_array_values);
+	for(var i = 0; i < 4; i++){
+		row.deleteCell(i);
+		new_cell = row.insertCell(i);
+		new_cell.innerHTML = order_notes_values[i];
+	}
+}
+
+function remove_order_note_body(){
+  const element = document.getElementById("demo");
+  element.remove();
+}
+
+</script>
+
+
