@@ -127,7 +127,6 @@ $array_unique_time_ends_no_repeats = SQL_Init_Request::get_sql_vars_two()[1];
   <!-- Modal content -->
   <div class="modal-content">
     <div class="modal-header">
-<!-- <h2>Modal Template</h2> -->
       <span class="close">×</span>
       <h2 id="modal-number">Modal One</h2>
     </div>
@@ -139,14 +138,8 @@ $array_unique_time_ends_no_repeats = SQL_Init_Request::get_sql_vars_two()[1];
 				</tr>
 			</thead>
 
-			<tbody>
-				<tr id="dynamic-info-row">
-					<th>placeholder</th>
-					<th>placeholder</th>
-					<th>placeholder</th>
-					<th>placeholder</th>
-
-				</tr>
+			<tbody id="modal-table-body">
+			<!-- Rows will be inserted here. -->
 			</tbody>
 		</table>
 
@@ -166,7 +159,6 @@ $array_unique_time_ends_no_repeats = SQL_Init_Request::get_sql_vars_two()[1];
 </div>
 <br>
 <br>
-
 
 
 
@@ -243,6 +235,7 @@ var published_php_array =
     <?php echo json_encode($filtered_time); ?>;
 
 var published_array = Object.values(published_php_array);
+console.log(published_array);
 
 // Get the button that opens the modal
 var btn = document.querySelectorAll("button.modal-button");
@@ -272,6 +265,8 @@ window.onclick = function(event) {
     }
 }
 
+
+
 function place_html(ticker_value){
 	console.log(ticker_value);
 	var para = document.getElementById('paragraph-id');
@@ -284,27 +279,56 @@ function place_html(ticker_value){
 	// para.innerHTML = "This is a paragraph";
   var modal_number_id = document.getElementById("modal-number");
   modal_number_id.innerHTML = "Modal " + ticker_value; 
+
   order_note_body();
   modal = document.getElementById("myModal1");
   modal.style.display = "block";
 }
 
+
+
+
+
+
+
 function order_note_body(){
 	order_notes_values = Object.values(published_array_values[9]);
-	row = document.getElementById("dynamic-info-row");
-	console.log(1060);	
-	console.log(this.published_array_values);
-	for(var i = 0; i < 4; i++){
-		row.deleteCell(i);
-		new_cell = row.insertCell(i);
-		new_cell.innerHTML = order_notes_values[i];
+	console.log(1070);
+	console.log(order_notes_values);
+
+	table = document.getElementById("order-note-table");
+	table_body = document.getElementById("modal-table-body");
+	table_body.innerHTML = "";
+
+	for(var i = 0; i < order_notes_values.length; i++){
+		var insert_row = table_body.insertRow(i);
+		
+		order_notes_values_iterate = Object.values(order_notes_values[i]);
+			console.log(1250);
+
+			note_id = order_notes_values_iterate[0];
+			console.log(note_id);
+			note_id_cell = insert_row.insertCell(0);
+			note_id_cell.innerHTML = note_id;
+
+			note_date = order_notes_values_iterate[1];
+			console.log(note_date);
+			note_date_cell = insert_row.insertCell(1);
+			note_date_cell.innerHTML = note_date;
+
+			note_author = order_notes_values_iterate[2];
+			console.log(note_author);
+			note_author_cell = insert_row.insertCell(2);
+			note_author_cell.innerHTML = note_author;
+
+			note_date = order_notes_values_iterate[3];
+			console.log(note_date);
+			note_date_cell = insert_row.insertCell(3);
+			note_date_cell.innerHTML = note_date;
 	}
 }
 
-function remove_order_note_body(){
-  const element = document.getElementById("demo");
-  element.remove();
-}
+
 
 </script>
 

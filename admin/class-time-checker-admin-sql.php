@@ -496,22 +496,14 @@ public static function arrays_to_combine($a1,$a2){
 				self::get_private_order_notes($a1[$i]["wc"]),
 				"has_paid" => 	
 				self::determine_paid($a1[$i]["wc"]) 
-					//$WC_Order->get_customer_order_notes()
-
 				);	
 			}
 		}
-
 		 if ($i ==  $counter - 1){ 
-
 			$i = -1;
 			$j++;
-			//echo PHP_EOL;
-			//echo "520";
 			if( $j == $counter){
-			//echo "j or $j is at count of". 
 			$counter;
-			// This whole for loop should be exited.
 				return $combined_array; 
 		 	
 		 }
