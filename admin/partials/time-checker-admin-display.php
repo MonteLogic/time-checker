@@ -146,7 +146,7 @@ $array_unique_time_ends_no_repeats = SQL_Init_Request::get_sql_vars_two()[1];
       <p id="paragraph-id"></p>
 	</div>
     <div class="modal-footer">
-      <h3>Modal Footer</h3>
+     <!--  <h3>Modal Footer</h3> -->
     </div>
   </div>
 
@@ -278,7 +278,7 @@ function place_html(ticker_value){
 	console.log(published_array_length); 
 	// para.innerHTML = "This is a paragraph";
   var modal_number_id = document.getElementById("modal-number");
-  modal_number_id.innerHTML = "Modal " + ticker_value; 
+  modal_number_id.innerHTML = "Order Notes"; 
 
   order_note_body();
   modal = document.getElementById("myModal1");

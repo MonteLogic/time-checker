@@ -229,18 +229,6 @@ public static function find_metadata_sql($product_id) {
 ");
 
 
-	$customer_emails = $wpdb->get_col("
-   SELECT DISTINCT pm.meta_value FROM {$wpdb->posts} AS p
-   INNER JOIN {$wpdb->postmeta} AS pm ON p.ID = pm.post_id
-   INNER JOIN {$wpdb->prefix}woocommerce_order_items AS i ON p.ID = i.order_id
-   INNER JOIN {$wpdb->prefix}woocommerce_order_itemmeta AS im ON i.order_item_id = im.order_item_id
-   WHERE p.post_status IN ( 'wc-" . implode( "','wc-", $statuses ) . "' )
-   AND pm.meta_key IN ( '_billing_email' )
-   AND im.meta_key IN ( '_product_id', '_variation_id' )
-   AND im.meta_value = $product_id
-");
-
-
 
 	$customer_phone = $wpdb->get_col("
    SELECT DISTINCT pm.meta_value FROM {$wpdb->posts} AS p
@@ -270,6 +258,23 @@ public static function find_metadata_sql($product_id) {
  */
 	$booking_product_id_sql_cmd = 
 		"SELECT post_id FROM {$wpdb->prefix}postmeta WHERE meta_key = '_booking_product_id' AND meta_value = $product_id ";
+
+
+/**
+ * Get the the course name for the ["course_name"] 
+ */
+	$course_name_string_cmd = 
+		"SELECT post_title FROM {$wpdb->prefix}posts WHERE id = $product_id ";
+	echo "558";	
+
+
+	$course_name_string_array = 
+		$wpdb->get_results( $course_name_string_cmd, ARRAY_A);
+
+		echo "<h1>Course Entered = " . $course_name_string_array[0]["post_title"] . "</h1>";
+		
+
+
 
 
 /**
@@ -579,6 +584,20 @@ public static function search_form_output($date_entered, $formatted_date, $combi
         echo "<h1> Date submitted = " . $formatted_date . " </h1>";
         echo "<br>";
     }
+
+	if(!$date_entered){
+        echo "<br>";
+        echo "<h1>No date provided</h1>";
+        echo "<br>";
+    }
+    if($date_entered){
+        echo "<br>";
+        echo "<h1> Date submitted = " . $formatted_date . " </h1>";
+        echo "<br>";
+    }
+
+
+
 }
 
 public static function output_times_dates($filtered_date, $filtered_time){
@@ -634,7 +653,7 @@ if (count($filtered_time) > 0): ?>
 		echo  "<td>"  . htmlspecialchars( $wc_id[$iterate]) . "</td>"; 
 		echo  "<td>"  . 
 						'<button class="modal-button" type="button" 
-						onClick="place_html( ' . $iterate . ' )">View Modal</button>'.
+						onClick="place_html( ' . $iterate . ' )">View Notes</button>'.
 						"</td>";
 		echo  "<td>"  . htmlspecialchars( $has_paid[$iterate]) . "</td>"; 
 	?></td>
